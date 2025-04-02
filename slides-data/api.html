@@ -9,7 +9,7 @@
 <meta name="author" content="Lino Galiana">
 <meta name="dcterms.date" content="2025-09-04">
 
-<title>Masterclass API – Atelier du SSPHub</title>
+<title>Masterclass API</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -74,15 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8647a4a42273f773479d27c00df3f9ed.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-831a6e13d34e89ab8943621a9b1bffba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -138,76 +137,16 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Atelier du <code>SSPHub</code></span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Recherche"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../slides-data/api.html" aria-current="page"> 
-<span class="menu-text">API</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sur cette page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#quest-ce-quune-api" id="toc-quest-ce-quune-api" class="nav-link" data-scroll-target="#quest-ce-quune-api">Qu’est-ce qu’une API ?</a></li>
-  <li><a href="#les-apis-rest" id="toc-les-apis-rest" class="nav-link" data-scroll-target="#les-apis-rest">Les APIs REST</a></li>
-  <li><a href="#analogie-avec-un-restaurant" id="toc-analogie-avec-un-restaurant" class="nav-link" data-scroll-target="#analogie-avec-un-restaurant">Analogie avec un restaurant</a></li>
-  <li><a href="#pourquoi-les-api" id="toc-pourquoi-les-api" class="nav-link" data-scroll-target="#pourquoi-les-api">Pourquoi les API ?</a></li>
-  <li><a href="#les-api-de-données" id="toc-les-api-de-données" class="nav-link" data-scroll-target="#les-api-de-données">Les API de données</a></li>
-  <li><a href="#les-api-de-données-1" id="toc-les-api-de-données-1" class="nav-link" data-scroll-target="#les-api-de-données-1">Les API de données</a></li>
-  </ul></li>
-  <li><a href="#concepts-principaux" id="toc-concepts-principaux" class="nav-link" data-scroll-target="#concepts-principaux">Concepts principaux</a>
-  <ul class="collapse">
-  <li><a href="#structuration-dune-requête" id="toc-structuration-dune-requête" class="nav-link" data-scroll-target="#structuration-dune-requête">Structuration d’une requête</a></li>
-  <li><a href="#les-requêtes-http" id="toc-les-requêtes-http" class="nav-link" data-scroll-target="#les-requêtes-http">Les requêtes HTTP</a></li>
-  <li><a href="#les-swaggers" id="toc-les-swaggers" class="nav-link" data-scroll-target="#les-swaggers">Les <em>swaggers</em></a></li>
-  </ul></li>
-  <li><a href="#partie-pratique" id="toc-partie-pratique" class="nav-link" data-scroll-target="#partie-pratique">Partie pratique</a>
-  <ul class="collapse">
-  <li><a href="#les-requêtes-get" id="toc-les-requêtes-get" class="nav-link" data-scroll-target="#les-requêtes-get">Les requêtes <code>GET</code></a></li>
-  <li><a href="#les-requêtes-post" id="toc-les-requêtes-post" class="nav-link" data-scroll-target="#les-requêtes-post">Les requêtes <code>POST</code></a></li>
-  </ul></li>
-  <li><a href="#gestion-des-secrets" id="toc-gestion-des-secrets" class="nav-link" data-scroll-target="#gestion-des-secrets">Gestion des secrets</a>
-  <ul class="collapse">
-  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">Bonnes pratiques</a></li>
-  <li><a href="#bonnes-pratiques-pour-les-secrets" id="toc-bonnes-pratiques-pour-les-secrets" class="nav-link" data-scroll-target="#bonnes-pratiques-pour-les-secrets">Bonnes pratiques pour les secrets</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="api.html"><i class="bi bi-file-slides"></i>RevealJS (onyxia)</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="api.html"><i class="bi bi-file-slides"></i>RevealJS (onyxia)</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -874,64 +813,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-      for (let i=0; i<annoteTargets.length; i++) {
-        const annoteTarget = annoteTargets[i];
-        const targetCell = annoteTarget.getAttribute("data-target-cell");
-        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-        const contentFn = () => {
-          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          if (content) {
-            const tipContent = content.cloneNode(true);
-            tipContent.classList.add("code-annotation-tip-content");
-            return tipContent.outerHTML;
-          }
-        }
-        const config = {
-          allowHTML: true,
-          content: contentFn,
-          onShow: (instance) => {
-            selectCodeLines(instance.reference);
-            instance.reference.classList.add('code-annotation-active');
-            window.tippy.hideAll();
-          },
-          onHide: (instance) => {
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
             unselectCodeLines();
-            instance.reference.classList.remove('code-annotation-active');
-          },
-          maxWidth: 300,
-          delay: [50, 0],
-          duration: [200, 0],
-          offset: [5, 10],
-          arrow: true,
-          appendTo: function(el) {
-            return el.parentElement.parentElement.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'quarto',
-          placement: 'right',
-          popperOptions: {
-            modifiers: [
-            {
-              name: 'flip',
-              options: {
-                flipVariations: false, // true by default
-                allowedAutoPlacements: ['right'],
-                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-              },
-            },
-            {
-              name: 'preventOverflow',
-              options: {
-                mainAxis: false,
-                altAxis: false
-              }
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
             }
-            ]        
-          }      
-        };
-        window.tippy(annoteTarget, config); 
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
