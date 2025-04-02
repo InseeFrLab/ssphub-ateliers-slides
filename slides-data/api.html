@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR" xml:lang="fr-FR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lino Galiana">
+<meta name="dcterms.date" content="2025-09-04">
+
+<title>Masterclass API – Atelier du SSPHub</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8647a4a42273f773479d27c00df3f9ed.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Atelier du <code>SSPHub</code></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../slides-data/api.html" aria-current="page"> 
+<span class="menu-text">API</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#quest-ce-quune-api" id="toc-quest-ce-quune-api" class="nav-link" data-scroll-target="#quest-ce-quune-api">Qu’est-ce qu’une API ?</a></li>
+  <li><a href="#les-apis-rest" id="toc-les-apis-rest" class="nav-link" data-scroll-target="#les-apis-rest">Les APIs REST</a></li>
+  <li><a href="#analogie-avec-un-restaurant" id="toc-analogie-avec-un-restaurant" class="nav-link" data-scroll-target="#analogie-avec-un-restaurant">Analogie avec un restaurant</a></li>
+  <li><a href="#pourquoi-les-api" id="toc-pourquoi-les-api" class="nav-link" data-scroll-target="#pourquoi-les-api">Pourquoi les API ?</a></li>
+  <li><a href="#les-api-de-données" id="toc-les-api-de-données" class="nav-link" data-scroll-target="#les-api-de-données">Les API de données</a></li>
+  <li><a href="#les-api-de-données-1" id="toc-les-api-de-données-1" class="nav-link" data-scroll-target="#les-api-de-données-1">Les API de données</a></li>
+  </ul></li>
+  <li><a href="#concepts-principaux" id="toc-concepts-principaux" class="nav-link" data-scroll-target="#concepts-principaux">Concepts principaux</a>
+  <ul class="collapse">
+  <li><a href="#structuration-dune-requête" id="toc-structuration-dune-requête" class="nav-link" data-scroll-target="#structuration-dune-requête">Structuration d’une requête</a></li>
+  <li><a href="#les-requêtes-http" id="toc-les-requêtes-http" class="nav-link" data-scroll-target="#les-requêtes-http">Les requêtes HTTP</a></li>
+  <li><a href="#les-swaggers" id="toc-les-swaggers" class="nav-link" data-scroll-target="#les-swaggers">Les <em>swaggers</em></a></li>
+  </ul></li>
+  <li><a href="#partie-pratique" id="toc-partie-pratique" class="nav-link" data-scroll-target="#partie-pratique">Partie pratique</a>
+  <ul class="collapse">
+  <li><a href="#les-requêtes-get" id="toc-les-requêtes-get" class="nav-link" data-scroll-target="#les-requêtes-get">Les requêtes <code>GET</code></a></li>
+  <li><a href="#les-requêtes-post" id="toc-les-requêtes-post" class="nav-link" data-scroll-target="#les-requêtes-post">Les requêtes <code>POST</code></a></li>
+  </ul></li>
+  <li><a href="#gestion-des-secrets" id="toc-gestion-des-secrets" class="nav-link" data-scroll-target="#gestion-des-secrets">Gestion des secrets</a>
+  <ul class="collapse">
+  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">Bonnes pratiques</a></li>
+  <li><a href="#bonnes-pratiques-pour-les-secrets" id="toc-bonnes-pratiques-pour-les-secrets" class="nav-link" data-scroll-target="#bonnes-pratiques-pour-les-secrets">Bonnes pratiques pour les secrets</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="api.html"><i class="bi bi-file-slides"></i>RevealJS (onyxia)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Masterclass API</h1>
+<p class="subtitle lead"></p><p><strong><span class="orange">Masterclass du <code>SSPHub</code></span></strong></p><p></p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Auteur·rice</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://www.linogaliana.fr/">Lino Galiana</a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Insee
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">09/04/2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="quest-ce-quune-api" class="level2">
+<h2 class="anchored" data-anchor-id="quest-ce-quune-api">Qu’est-ce qu’une API ?</h2>
+<blockquote class="blockquote">
+<p>Une API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.</p>
+<p><a href="https://www.cnil.fr/fr/definition/interface-de-programmation-dapplication-api">CNIL</a></p>
+</blockquote>
+<ul>
+<li>Définition peu informative
+<ul>
+<li><code>Python</code>, <code>scikit-learn</code>, <code>Docker</code>, etc. sont des APIs</li>
+<li>En pratique, on signifie généralement une <span class="blue2"><strong>API REST</strong></span></li>
+</ul></li>
+</ul>
+</section>
+<section id="les-apis-rest" class="level2">
+<h2 class="anchored" data-anchor-id="les-apis-rest">Les APIs REST</h2>
+<ul>
+<li><span class="orange"><strong>API RESTful</strong></span> : API conforme au style d’architecture <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>
+<ul>
+<li>Communication via le <span class="blue2"><strong>protocole HTTP</strong></span></li>
+</ul></li>
+<li>En pratique :
+<ul>
+<li>On requête un <span class="blue2"><strong>endpoint</strong></span> (ex : <a href="https://api-adresse.data.gouv.fr/search/">l’API de la BAN</a>)</li>
+<li>Avec des <span class="blue2"><strong>requêtes HTTP</strong></span> (<code>GET</code>, <code>POST</code>, etc.) (ex : <a href="https://api-adresse.data.gouv.fr/search/?q=comédie&amp;type=street">rues contenant “comédie”</a>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="analogie-avec-un-restaurant" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="analogie-avec-un-restaurant">Analogie avec un restaurant</h2>
+<ul>
+<li>💬 <strong><span class="orange">Vous passez commande</span></strong>
+<ul>
+<li>Requête avec paramètres depuis <i class="fa-brands fa-python" aria-label="python"></i>, <i class="fa-brands fa-r-project" aria-label="r-project"></i>, votre navigateur…</li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>↔︎️ <strong><span class="orange">Le serveur transmet la commande en cuisine</span></strong>:
+<ul>
+<li>Point d’entrée de l’API</li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>🧑‍🍳 <strong><span class="orange">La cuisine prépare le plat</span></strong>
+<ul>
+<li>Le serveur (informatique) fait les traitements <em>ad hoc</em></li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>🍕 <strong><span class="orange">Vous recevez votre plat</span></strong>
+<ul>
+<li>Vous recevez une réponse au format <code>JSON</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="pourquoi-les-api" class="level2">
+<h2 class="anchored" data-anchor-id="pourquoi-les-api">Pourquoi les API ?</h2>
+<ul>
+<li><span class="blue2"><em>Praticité</em></span> car permet de dissocier
+<ul>
+<li>Le <strong><span class="orange">client</span></strong>: une interface web (<i class="fa-brands fa-firefox" aria-label="firefox"></i>) ou un langage informatique (<i class="fa-brands fa-python" aria-label="python"></i>, <i class="fa-brands fa-r-project" aria-label="r-project"></i>, <i class="fa-brands fa-js-square" aria-label="js-square"></i>…)</li>
+<li>Le <strong><span class="orange">serveur</span></strong>: le moteur de calcul derrière</li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li><span class="blue2"><em>Sobriété</em></span>: permet l’accès à la donnée voulue sans parcourir tout un fichier</li>
+</ul>
+<p>. . .</p>
+<ul>
+<li><span class="blue2"><em>Confidentialité</em></span>: on peut mettre des droits d’accès à certaines données</li>
+</ul>
+<p>. . .</p>
+<ul>
+<li><em><span class="blue2">Unversalité</span></em>: pas d’<em>a priori</em> sur le mode d’accès</li>
+</ul>
+</section>
+<section id="les-api-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="les-api-de-données">Les API de données</h2>
+<p><img src="./images/serveur-modele-no-bg.png" class="img-fluid"></p>
+</section>
+<section id="les-api-de-données-1" class="level2">
+<h2 class="anchored" data-anchor-id="les-api-de-données-1">Les API de données</h2>
+<ul>
+<li>Plus de fichiers enregistrés manuellement
+<ul>
+<li><span class="orange"><strong>Mise à jour assurée</strong></span> par le producteur</li>
+<li><span class="orange"><strong>Directement propagées</strong></span> au consommateur de données</li>
+<li>Permet l’automatisation de scripts sans stockage local</li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li><span class="orange"><strong>Contrat formel</strong></span> avec un producteur de données
+<ul>
+<li>Contrairement au <em>webscraping</em>!</li>
+</ul></li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>Permet de récupérer des <span class="orange"><strong>données transformées complexes</strong></span>
+<ul>
+<li>Exemple: inférences de modèles 🤖</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="concepts-principaux" class="level1">
+<h1>Concepts principaux</h1>
+<section id="structuration-dune-requête" class="level2">
+<h2 class="anchored" data-anchor-id="structuration-dune-requête">Structuration d’une requête</h2>
+<p>Les requêtes prennent la forme d’URL:</p>
+<p><span class="math display">\[
+\underbrace{\text{https://api-adresse.data.gouv.fr}}_{\text{API root}}/\underbrace{\text{search}}_{\text{API endpoint}}
+\]</span></p>
+<p><span class="math display">\[
+/?\underbrace{\text{q=88+avenue+verdier}}_{\text{main parameter}}\&amp;\underbrace{\text{postcode=92120}}_{\text{additional parameter}}
+\]</span></p>
+<p>Auxquelles vont s’ajouter des <em>headers</em> (explication à venir)</p>
+<div class="note">
+<p>Démonstration interactive dans les exercices!</p>
+</div>
+</section>
+<section id="les-requêtes-http" class="level2">
+<h2 class="anchored" data-anchor-id="les-requêtes-http">Les requêtes HTTP</h2>
+<ul>
+<li><code>GET</code>: récupérer des données depuis un serveur web (lecture d’une base de données…)</li>
+<li><code>POST</code>: envoyer des données au serveur (formulaires de mise à jour de données, etc.)</li>
+<li><code>Python</code> communique avec internet via le <strong><em>package</em> <code>requests</code></strong> (<code>requests.get</code> et <code>requests.post</code>)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Les codes HTTP
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<details>
+<summary>
+Signification des codes HTTP
+</summary>
+<ul>
+<li>1xx : Informations</li>
+<li>2xx : Succès</li>
+<li>3xx : Redirections</li>
+<li>4xx : Erreurs côté client</li>
+<li>5xx : Erreurs côté serveur</li>
+</ul>
+</details>
+<details>
+<summary>
+Codes à retenir
+</summary>
+<p>Ceux à retenir sont : <span class="blue2"><strong>200</strong></span> (succès), <span class="blue2"><strong>400</strong></span> (requête mal structurée), <span class="blue2"><strong>401</strong></span> (authentification non réussie), <span class="blue2"><strong>403</strong></span> (accès interdit), <span class="blue2"><strong>404</strong></span> (ressource demandée n’existe pas), <span class="blue2"><strong>503</strong></span> (le serveur n’est pas en capacité de répondre)</p>
+</details>
+</div>
+</div>
+</section>
+<section id="les-swaggers" class="level2">
+<h2 class="anchored" data-anchor-id="les-swaggers">Les <em>swaggers</em></h2>
+<div class="columns">
+<div class="column" style="width:56%;">
+<ul>
+<li>Format standardisé de documentation
+<ul>
+<li>Généralement entrypoint <code>/docs</code></li>
+</ul></li>
+<li>Utilisation interactive et exemples <code>curl</code> (ligne de commande)</li>
+</ul>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:36%;">
+<p><img src="https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="partie-pratique" class="level1">
+<h1>Partie pratique</h1>
+<section id="les-requêtes-get" class="level2">
+<h2 class="anchored" data-anchor-id="les-requêtes-get">Les requêtes <code>GET</code></h2>
+<ul>
+<li>Requête la plus commune</li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>Transformation en objet <i class="fa-brands fa-python" aria-label="python"></i> (<code>JSON</code> -&gt; <code>dict</code>) est naturelle</li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>Formattage dépend de chaque API (lire la doc ! 👮)</li>
+</ul>
+<p>. . .</p>
+<ul>
+<li>Retravailler l’<em>output</em> peut être lourd</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>adresse <span class="op">=</span> <span class="st">"88 avenue verdier"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url_ban_example <span class="op">=</span> <span class="ss">f"https://api-adresse.data.gouv.fr/search/?q=</span><span class="sc">{</span>adresse<span class="sc">.</span>replace(<span class="st">" "</span>, <span class="st">"+"</span>)<span class="sc">}</span><span class="ss">&amp;postcode=92120"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>requests.get(url_ban_example).json()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="les-requêtes-post" class="level2">
+<h2 class="anchored" data-anchor-id="les-requêtes-post">Les requêtes <code>POST</code></h2>
+<ul>
+<li><p>Plus complexe mais <code>requests</code> est suffisamment flexible</p></li>
+<li><p>Plus compliqué est de rentrer les objets <code>Python</code> dans le cadre de l’API</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"columns"</span>: [<span class="st">"adresse"</span>, <span class="st">"Nom_commune"</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"citycode"</span>: <span class="st">"DEPCOM"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"result_columns"</span>: [<span class="st">"result_score"</span>, <span class="st">"latitude"</span>, <span class="st">"longitude"</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"https://api-adresse.data.gouv.fr/search/csv/"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>params,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        files<span class="op">=</span>{<span class="st">"data"</span>: <span class="bu">open</span>(csv_file, <span class="st">"rb"</span>)},</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="gestion-des-secrets" class="level1">
+<h1>Gestion des secrets</h1>
+<section id="bonnes-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="bonnes-pratiques">Bonnes pratiques</h2>
+<p><span class="orange"><strong>La doctrine générale</strong></span></p>
+<p><img src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/environment_clean.png" class="img-fluid"></p>
+</section>
+<section id="bonnes-pratiques-pour-les-secrets" class="level2">
+<h2 class="anchored" data-anchor-id="bonnes-pratiques-pour-les-secrets">Bonnes pratiques pour les secrets</h2>
+<ol type="1">
+<li>Boite de dialogue via <code>getpass</code> (application interactive uniquement)</li>
+<li>Variables d’environnement:
+<ul>
+<li>Dans un fichier <code>.env</code> (non committé!)</li>
+<li>Dans les secrets de l’intégration continue</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.getenv(<span class="st">"MON_PETIT_JETON"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li><p>Pratique pour récupérer des données ponctuelles:</p>
+<ul>
+<li>Afficher un nombre limité d’enregistrements dans une application</li>
+<li>Récupérer des données issues d’un processus de transformation complexe</li>
+</ul></li>
+<li><p>Limitées en termes de volumétrie ou stabilité d’accès</p></li>
+<li><p>Code très adhérant à une API et un langage client</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
