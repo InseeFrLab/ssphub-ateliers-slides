@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr-FR"><head>
-<script src="../site_libs/tone/tone.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -8,14 +7,11 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.43">
 
   <meta name="author" content="Lino Galiana">
-  <meta name="dcterms.date" content="2025-09-04">
-  <title>Masterclass API</title>
+  <title>Le format de données Parquet</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -102,9 +98,12 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8f62eb61b5baf0f2495119921d4031c4.css">
   <link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/InseeFrLab/onyxia/logo.css">
   <link rel="stylesheet" href="../custom.css">
+  <link rel="stylesheet" href="custom.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -200,379 +199,287 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="../site_libs/quarto-contrib/quarto-project/InseeFrLab/onyxia/background.svg" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Masterclass API</h1>
-  <p class="subtitle"></p><p><strong><span class="orange">Masterclass du <code>SSPHub</code></span></strong></p><p></p>
+  <h1 class="title">Le format de données <code>Parquet</code></h1>
+  <p class="subtitle">Ateliers du SSPHub #2</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-<a href="https://www.linogaliana.fr/">Lino Galiana</a> 
+Lino Galiana 
 </div>
-        <p class="quarto-title-affiliation">
-            Insee
-          </p>
-    </div>
+</div>
 </div>
 
-  <p class="date">09/04/2025</p>
+  <p class="date">16 avril 2025</p>
+</section>
+<section id="the-obligatory-intro-slide" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>“The obligatory intro slide”</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/intro-big-data.png" height="400"></p>
+<figcaption>Source : <a href="https://motherduck.com/blog/big-data-is-dead/">motherduck.com</a></figcaption>
+</figure>
+</div>
+</section>
+<section id="enjeux" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Enjeux</h2>
+<ul>
+<li>Tendance à la <span class="orange"><strong>massification</strong></span> des données
+<ul>
+<li>Relatif aux <span class="blue2"><strong>capacités de stockage et de traitement</strong></span></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/vvv.png" height="350"></p>
+<figcaption>Source : <a href="https://www.packtpub.com/product/artificial-intelligence-with-python-second-edition/9781839219535">AI with Python</a></figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="pour-traiter-la-volumétrie" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Pour traiter la volumétrie</h2>
+<ul>
+<li><p>Utiliser une <span class="orange"><strong>infra de stockage</strong></span> adaptée (<code>S3</code>)</p></li>
+<li><p>Utiliser un <span class="orange"><strong>format</strong></span> de données adapté (<code>Parquet</code>)</p></li>
+<li><p>Utiliser des <span class="orange"><strong>outils</strong></span> informatiques adaptés</p>
+<ul>
+<li>Suffisant la plupart du temps : <span class="blue2"><strong>calcul <em>larger than memory</em> optimisé</strong></span> (<code>Arrow</code> / <code>DuckDB</code>)</li>
+<li>Si volumétrie massive : <span class="blue2"><strong>calcul distribué</strong></span> (<code>Spark</code>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="big-data-is-dead" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>“Big Data is dead” ?</h2>
+<ul>
+<li>Jordan Tigani : <a href="https://motherduck.com/blog/big-data-is-dead/">Big Data is dead</a>
+<ul>
+<li>“The big data frontier keeps receding”</li>
+<li>“Most people don’t have that much data”</li>
+<li>“Most data is rarely queried”</li>
+</ul></li>
+<li>Plaidoyer pour une <span class="orange"><strong>parcimonie</strong></span>…
+<ul>
+<li>… qui <span class="blue2"><strong>facilite la mise en production</strong></span> !</li>
+</ul></li>
+</ul>
 </section>
 <section>
-<section id="introduction" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>Introduction</h1>
+<section id="pourquoi-le-format-parquet" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>Pourquoi le format <code>Parquet</code> ?</h1>
 
 </section>
-<section id="quest-ce-quune-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Qu’est-ce qu’une API ?</h2>
-<p><br></p>
-<div style="font-size: 70%;">
-<blockquote>
-<p><span class="smaller">Une API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.</span></p>
-<p><a href="https://www.cnil.fr/fr/definition/interface-de-programmation-dapplication-api">CNIL</a></p>
-</blockquote>
-</div>
+<section id="enjeux-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Enjeux</h2>
 <ul>
-<li>Définition peu informative:
+<li>Le choix d’un format de données répond à un <span class="orange"><strong>arbitrage</strong></span> entre plusieurs critères :
 <ul>
-<li><code>Python</code>, <code>scikit-learn</code>, <code>Docker</code>, etc. sont des APIs</li>
-<li>En pratique, on signifie généralement une <span class="blue2"><strong>API REST</strong></span></li>
+<li><span class="blue2"><strong>Public cible</strong></span></li>
+<li><span class="blue2"><strong>Finalité</strong></span> (traitement, analyse, diffusion)</li>
+<li><span class="blue2"><strong>Volumétrie</strong></span></li>
+<li><span class="blue2"><strong>Interopérabilité</strong></span></li>
 </ul></li>
 </ul>
 </section>
-<section id="les-apis-rest" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les APIs REST</h2>
-<p><br></p>
+<section id="formats-traditionnels" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Formats traditionnels</h2>
 <ul>
-<li><span class="orange"><strong>API RESTful</strong></span> : API conforme au style d’architecture <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>
+<li>Formats de données adhérents à un langage (<span class="orange"><strong>sas7bdat</strong></span>, <span class="orange"><strong>RDS</strong></span>, <span class="orange"><strong>fst</strong></span>, etc.)
 <ul>
-<li>Communication via le <span class="blue2"><strong>protocole HTTP</strong></span></li>
+<li><span class="blue2"><strong>Non-interopérables</strong></span> -&gt; à éviter !</li>
 </ul></li>
-</ul>
-<div class="fragment">
+<li>Le format <span class="orange"><strong>CSV</strong></span>
 <ul>
-<li>En pratique :
-<ul>
-<li>On accède à un <span class="blue2"><strong>endpoint</strong></span> (ex : <a href="https://api-adresse.data.gouv.fr/search/">l’API de la BAN</a>)</li>
-<li>Avec des <span class="blue2"><strong>requêtes HTTP</strong></span> (<code>GET</code>, <code>POST</code>, etc.) (ex : <a href="https://api-adresse.data.gouv.fr/search/?q=comédie&amp;type=street">rues contenant “comédie”</a>)</li>
+<li><span class="blue2"><strong>Interopérable</strong></span> et <span class="blue2"><strong>simple</strong></span> d’utilisation</li>
+<li>Pas de gestion des <span class="blue2"><strong>méta-données</strong></span></li>
+<li>Peu adapté aux <span class="blue2"><strong>données volumineuses</strong></span></li>
 </ul></li>
-</ul>
-</div>
-</section>
-<section id="analogie-avec-un-restaurant" class="slide level2 smaller" data-background-image="background.svg" data-background-size="contain">
-<h2>Analogie avec un restaurant</h2>
-<p><br></p>
-<ul>
-<li>💬 <strong><span class="orange">Vous passez commande</span></strong>
-<ul>
-<li>Requête avec paramètres depuis <i class="fa-brands fa-python" aria-label="python"></i>, <i class="fa-brands fa-r-project" aria-label="r-project"></i>, votre navigateur…</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>↔︎️ <strong><span class="orange">Le serveur transmet la commande en cuisine</span></strong>:
-<ul>
-<li>Point d’entrée de l’API</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>🧑‍🍳 <strong><span class="orange">La cuisine prépare le plat</span></strong>
-<ul>
-<li>Le serveur (informatique) fait les traitements <em>ad hoc</em></li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>🍕 <strong><span class="orange">Vous recevez votre plat</span></strong>
-<ul>
-<li>Vous recevez une réponse au format <code>JSON</code></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="pourquoi-les-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Pourquoi les API ?</h2>
-<ul>
-<li><span class="blue2"><em>Praticité</em></span> car permet de dissocier:
-<ul>
-<li>Le <strong><span class="orange">client</span></strong>: une interface web (<i class="fa-brands fa-firefox" aria-label="firefox"></i>) ou un langage informatique (<i class="fa-brands fa-python" aria-label="python"></i>, <i class="fa-brands fa-r-project" aria-label="r-project"></i>, <i class="fa-brands fa-js-square" aria-label="js-square"></i>…)</li>
-<li>Le <strong><span class="orange">serveur</span></strong>: le moteur de calcul derrière</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li><span class="blue2"><em>Sobriété</em></span>: permet l’accès à la donnée voulue sans parcourir tout un fichier</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><span class="blue2"><em>Confidentialité</em></span>: on peut mettre des droits d’accès à certaines données</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em><span class="blue2">Unversalité</span></em>: pas d’<em>a priori</em> sur le mode d’accès</li>
-</ul>
-</div>
-</section>
-<section id="les-api-de-données" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les API de données</h2>
-<p><br></p>
-
-<img data-src="./images/serveur-modele-no-bg.png" class="r-stretch"></section>
-<section id="les-api-de-données-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les API de données</h2>
-<ul>
-<li>Plus de fichiers enregistrés manuellement
-<ul>
-<li><span class="orange"><strong>Mise à jour assurée</strong></span> par le producteur</li>
-<li><span class="orange"><strong>Directement propagées</strong></span> au consommateur de données</li>
-<li>Permet l’automatisation de scripts sans stockage local</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li><span class="orange"><strong>Contrat formel</strong></span> avec un producteur de données
-<ul>
-<li>Contrairement au <em>webscraping</em>!</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Permet de récupérer des <span class="orange"><strong>données transformées complexes</strong></span>
-<ul>
-<li>Exemple: inférences de modèles 🤖</li>
-</ul></li>
-</ul>
-</div>
-</section></section>
-<section>
-<section id="concepts-principaux" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>Concepts principaux</h1>
-
-</section>
-<section id="structuration-dune-requête" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Structuration d’une requête</h2>
-<p>Les requêtes prennent la forme d’<strong><span class="blue2">URI</span></strong>:</p>
-<div style="text-align: left !important;">
-<p><span class="math display">\[
-\quad \underbrace{\text{https://api-adresse.data.gouv.fr}}_{\text{API root}}/\underbrace{\text{search}}_{\text{API endpoint}}
-\]</span></p>
-<p><span class="math display">\[
-\quad /?\underbrace{\text{q=88+avenue+verdier}}_{\text{main parameter}}\&amp;\underbrace{\text{postcode=92120}}_{\text{additional parameter}}
-\]</span></p>
-</div>
-<p>Auxquelles vont s’ajouter des <span class="blue2"><strong><em>headers</em></strong></span> (explication à venir)</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><a href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.html">Démonstration interactive</a></p>
-</div>
-</div>
-</div>
-</section>
-<section id="les-requêtes-http" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les requêtes HTTP</h2>
-<ul>
-<li><code>GET</code>: récupérer des données depuis un serveur web (lecture d’une base de données…)</li>
-<li><code>POST</code>: envoyer des données au serveur (formulaires de mise à jour de données, etc.)</li>
-<li><code>Python</code> communique avec internet via le <strong><em>package</em> <code>requests</code></strong> (<code>requests.get</code> et <code>requests.post</code>)</li>
 </ul>
 </section>
-<section id="les-codes-http" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les codes HTTP</h2>
-<ul>
-<li>Signification des codes HTTP
-<ul>
-<li>1xx : Informations</li>
-<li>2xx : Succès</li>
-<li>3xx : Redirections</li>
-<li>4xx : Erreurs côté client</li>
-<li>5xx : Erreurs côté serveur</li>
-</ul></li>
-</ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Codes à retenir</strong></p>
-</div>
-<div class="callout-content">
-<p>Ceux à retenir sont : <span class="blue2"><strong>200</strong></span> (succès), <span class="blue2"><strong>400</strong></span> (requête mal structurée), <span class="blue2"><strong>401</strong></span> (authentification nonréussie), <span class="blue2"><strong>403</strong></span> (accès interdit), <span class="blue2"><strong>404</strong></span> (ressource demandée n’existe pas), <span class="blue2"><strong>503</strong></span> (le serveur n’est pas en capacité de répondre)</p>
-</div>
-</div>
-</div>
-</section>
-<section id="les-swaggers" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les <em>swaggers</em></h2>
+<section id="limites-du-csv" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Limites du <code>CSV</code></h2>
 <div class="columns">
-<div class="column" style="width:56%;">
+<div class="column" style="width:70%;">
 <ul>
-<li>Format standardisé de documentation
+<li class="fragment">Des <span class="orange"><strong>performances limitées</strong></span>
 <ul>
-<li>Généralement <code>${URL_ROOT}/docs</code></li>
-</ul></li>
-<li>Utilisation interactive:
-<ul>
-<li>Génère des exemples <code>curl</code> (ligne de commande)</li>
+<li class="fragment"><span class="blue2"><strong>Stockage</strong></span> : non-compressé -&gt; <span class="blue2"><strong>espace disque élevé</strong></span></li>
+<li class="fragment"><span class="blue2"><strong>Lecture</strong></span> : “orienté-ligne” -&gt; <span class="blue2"><strong>performances faibles</strong></span></li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:4%;">
-
-</div><div class="column" style="width:36%;">
-<p><img data-src="https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png"></p>
-</div></div>
-</section>
-<section id="comment-connaître-les-paramètres-dune-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Comment connaître les paramètres d’une API ?</h2>
-<ul>
-<li><em>Swagger</em> <iconify-icon role="img" inline="" icon="vscode-icons:file-type-swagger" aria-label="Icon file-type-swagger from vscode-icons Iconify.design set." title="Icon file-type-swagger from vscode-icons Iconify.design set."></iconify-icon></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>Outils développement navigateur (<kbd>CTRL</kbd>+<kbd>MAJ</kbd>+<kbd>K</kbd> sur <i class="fa-brands fa-firefox" aria-label="firefox"></i>):
-<ul>
-<li>Onglet réseau <iconify-icon role="img" inline="" icon="uil:arrows-v" aria-label="Icon arrows-v from uil Iconify.design set." title="Icon arrows-v from uil Iconify.design set."></iconify-icon></li>
-</ul></li>
-</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/parquet-table1.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
 </div>
-<div class="fragment">
+</div><ul>
+<li><strong><span class="orange">Pas de typage</span></strong> des données à l’écriture du fichier
 <ul>
-<li><a href="https://www.postman.com/"><code>Postman</code></a> <iconify-icon role="img" inline="" icon="vscode-icons:file-type-postman" aria-label="Icon file-type-postman from vscode-icons Iconify.design set." title="Icon file-type-postman from vscode-icons Iconify.design set."></iconify-icon></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Extension <iconify-icon role="img" inline="" icon="vscode-icons:file-type-vscode" aria-label="Icon file-type-vscode from vscode-icons Iconify.design set." title="Icon file-type-vscode from vscode-icons Iconify.design set."></iconify-icon> <a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a></li>
+<li>Demande expertise et précaution à la lecture</li>
+<li>Exemple: <b><ins>01</ins>004</b> pour le code commune d’Ambérieu-en-Bugey</li>
+</ul></li>
 </ul>
 </div>
 </section></section>
 <section>
-<section id="partie-pratique" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>Partie pratique</h1>
+<section id="les-avantages-du-format-parquet" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>Les avantages du format <code>Parquet</code></h1>
 
 </section>
-<section id="les-requêtes-get" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les requêtes <span class="blue2"><code>GET</code></span></h2>
-<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
+<section id="un-format-léger" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Un format léger <iconify-icon role="img" inline="" icon="fe:feather" aria-label="Icon feather from fe Iconify.design set." title="Icon feather from fe Iconify.design set."></iconify-icon></h2>
 <ul>
-<li>Requête la plus commune</li>
-</ul>
-<div class="fragment">
+<li><span class="orange"><strong>Stockage</strong></span> :
 <ul>
-<li>Transformation en objet <i class="fa-brands fa-python" aria-label="python"></i> (<code>JSON</code> -&gt; <code>dict</code>) est naturelle</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Formattage dépend de chaque API (lire la doc ! 👮)</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Retravailler l’<em>output</em> peut être lourd</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> requests</span>
-<span id="cb1-2"><a></a>adresse <span class="op">=</span> <span class="st">"88 avenue verdier"</span></span>
-<span id="cb1-3"><a></a>url_ban_example <span class="op">=</span> (</span>
-<span id="cb1-4"><a></a>    <span class="ss">f"https://api-adresse.data.gouv.fr/search/"</span></span>
-<span id="cb1-5"><a></a>    <span class="ss">f"?q=</span><span class="sc">{</span>adresse<span class="sc">.</span>replace(<span class="st">" "</span>, <span class="st">"+"</span>)<span class="sc">}</span><span class="ss">&amp;postcode=92120"</span></span>
-<span id="cb1-6"><a></a>)</span>
-<span id="cb1-7"><a></a>requests.get(url_ban_example).json()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="les-requêtes-post" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les requêtes <code>POST</code></h2>
-<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
-<ul>
-<li><p>Envoyer des données utiles à l’API</p></li>
-<li><p>Plus complexe mais <code>Requests</code> est flexible</p>
-<ul>
-<li>Transformer les objets <i class="fa-brands fa-python" aria-label="python"></i> en <em>input</em> de l’API</li>
+<li><span class="blue2"><strong>Compression</strong></span> : entre 5 et 20 fois plus léger qu’un CSV</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>params <span class="op">=</span> {</span>
-<span id="cb2-2"><a></a>    <span class="st">"columns"</span>: [<span class="st">"adresse"</span>, <span class="st">"Nom_commune"</span>],</span>
-<span id="cb2-3"><a></a>    <span class="st">"citycode"</span>: <span class="st">"DEPCOM"</span>,</span>
-<span id="cb2-4"><a></a>    <span class="st">"result_columns"</span>: [<span class="st">"result_score"</span>, <span class="st">"latitude"</span>, <span class="st">"longitude"</span>],</span>
-<span id="cb2-5"><a></a>}</span>
-<span id="cb2-6"><a></a></span>
-<span id="cb2-7"><a></a>response <span class="op">=</span> requests.post(</span>
-<span id="cb2-8"><a></a>        <span class="st">"https://api-adresse.data.gouv.fr/search/csv/"</span>,</span>
-<span id="cb2-9"><a></a>        data<span class="op">=</span>params,</span>
-<span id="cb2-10"><a></a>        files<span class="op">=</span>{<span class="st">"data"</span>: <span class="bu">open</span>(csv_file, <span class="st">"rb"</span>)},</span>
-<span id="cb2-11"><a></a>    )</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exemple: Recensement de la Population</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><a href="https://www.insee.fr/fr/statistiques/8268848?sommaire=8205966">Ficher détail</a> : 20 millions de lignes, 92 variables
+<ul>
+<li>CSV: &gt; 4Go</li>
+<li>Parquet: &lt; 500Mo</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="le-format-parquet" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Le format <code>Parquet</code></h2>
+<ul>
+<li><span class="orange"><strong>Lecture</strong></span> :
+<ul>
+<li>Jusqu’à 34x plus rapide qu’un CSV</li>
+</ul></li>
+<li><span class="orange"><strong>“Orienté colonne”</strong></span>
+<ul>
+<li>Optimisé pour les <span class="blue2"><strong>traitements analytiques</strong></span></li>
+<li>Limite la quantité de données à mettre en mémoire</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./images/parquet-read-columns.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="le-format-parquet-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Le format <code>Parquet</code></h2>
+<ul>
+<li><span class="orange"><strong>Partitionner</strong></span> les données pour <span class="blue2"><strong>optimiser la lecture</strong></span></li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/partitions.png" class="quarto-figure quarto-figure-center" height="250"></p>
+</figure>
+</div>
+<div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>L’art de bien partitionner</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Partitionner par une/des <span class="blue2"><strong>variable(s) d’intérêt</strong></span></p></li>
+<li><p><span class="blue2"><strong>Eviter</strong></span> de créer de <span class="blue2"><strong>nombreux petits (&lt; 128Mo) fichiers</strong></span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="le-format-parquet-2" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Le format <code>Parquet</code></h2>
+<ul>
+<li><p>Gestion native des <span class="orange"><strong>méta-données</strong></span></p>
+<ul>
+<li>Définition automatique d’un <span class="blue2"><strong>schéma</strong></span> (noms, types)</li>
+<li>Mise à disposition plus <span class="blue2"><strong>robuste</strong></span></li>
+</ul></li>
+<li><p><span class="orange"><strong>Interopérable</strong></span></p></li>
+<li><p><span class="orange"><strong>Open-source</strong></span></p></li>
+</ul>
+</section>
+<section id="le-format-parquet-3" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Le format <code>Parquet</code></h2>
+<ul>
+<li>Deux <em>frameworks</em> de référence : <a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_arrow.html">Arrow</a> et <a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_duckdb.html">DuckDB</a>
+<ul>
+<li>Orientation <span class="blue2"><strong>fichier</strong></span> (<code>Arrow</code>) VS orientation <span class="blue2"><strong>BDD</strong></span> (<code>DuckDB</code>)</li>
+<li>Très bonne <span class="blue2"><strong>intégration</strong></span> avec le <code>tidyverse</code></li>
+</ul></li>
+<li><span class="orange"><strong>Traitement en-mémoire optimisé</strong></span>
+<ul>
+<li><span class="blue2"><strong>Orientés-colonne</strong></span></li>
+<li><span class="blue2"><strong><em>Lazy evaluation</em></strong></span></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exemple d’une requête <em>lazy</em></strong></p>
+</div>
+<div class="callout-content">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span>  <span class="co"># Récupère seulement les données nécessaires</span></span>
+<span id="cb1-3"><a></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span>  <span class="co"># Récupère seulement les colonnes nécessaires</span></span>
+<span id="cb1-4"><a></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a></a>  <span class="fu">collect</span>()  <span class="co"># Les calculs ne sont effectués qu'à cette étape !</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="le-format-parquet-4" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Le format <code>Parquet</code></h2>
+<ul>
+<li><code>Parquet</code> gagne sur tous les tableaux</li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/tableau-perf-parquet.png" class="quarto-figure quarto-figure-center" height="500"></p>
+</figure>
+</div>
+
+
+</div>
 </section></section>
-<section>
-<section id="gestion-des-secrets" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>Gestion des secrets</h1>
-
-</section>
-<section id="bonnes-pratiques" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Bonnes pratiques</h2>
-<p><span class="orange"><strong>La doctrine générale</strong></span></p>
-
-<img data-src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/environment_clean.png" class="r-stretch"><p><em>Source: <a href="https://ensae-reproductibilite.github.io/">Cours de l’ENSAE de mise en production</a></em></p>
-</section>
-<section id="bonnes-pratiques-pour-les-secrets" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Bonnes pratiques pour les secrets</h2>
-<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
-<ol type="1">
-<li><strong><span class="orange">Boite de dialogue</span></strong> via <a href="https://docs.python.org/3/library/getpass.html"><code>getpass</code></a> (application interactive uniquement)</li>
-</ol>
-<div class="fragment">
-<ol start="2" type="1">
-<li><strong><span class="orange">Variables d’environnement</span></strong>:
-<ul>
-<li>Dans un <span class="blue2">fichier <code>.env</code></span> (non committé!) lu avec <a href="https://pypi.org/project/python-dotenv/"><code>dotenv</code></a></li>
-<li>Dans les <span class="blue2">secrets</span> de l’intégration continue (cf.&nbsp;<a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions">doc <i class="fa-brands fa-github" aria-label="github"></i></a>)</li>
-</ul></li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
-<span id="cb3-2"><a></a>load_dotenv()</span>
-<span id="cb3-3"><a></a>token <span class="op">=</span> os.getenv(<span class="st">"MON_PETIT_JETON"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="conclusion" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Conclusion</h2>
-<ul>
-<li><span class="orange"><strong>Pratique</strong></span> pour récupérer des <strong><span class="orange">données ponctuelles</span></strong>:
-<ul>
-<li>Afficher un <strong><span class="blue2">nombre limité d’enregistrements</span></strong> dans une application</li>
-<li>Récupérer des données issues d’un <span class="blue2"><strong>processus de transformation complexe</strong></span></li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li><strong><span class="orange">Limitées</span></strong> en termes de <span class="blue2"><strong>volumétrie</strong></span> ou <strong><span class="blue2">stabilité d’accès</span></strong></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><strong><span class="orange">Code très adhérant</span></strong> à une API et un langage client</li>
-</ul>
-</div>
-</section>
-<section id="des-questions" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Des questions ?</h2>
-
-
-
-<img data-src="https://minio.lab.sspcloud.fr/lgaliana/generative-art/pythonds/kid.png" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><strong>Masterclass du <code>SSPHub</code></strong></p>
+<p>Ateliers du SSPHub #2</p>
 </div>
 </div></div>
 
@@ -583,7 +490,7 @@
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-tone/tone.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -598,18 +505,19 @@
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true,"theme":"whiteboard"},
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -776,7 +684,7 @@
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoTone, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
