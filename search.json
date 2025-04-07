@@ -4,28 +4,28 @@
     "href": "slides-data/api.html#quest-ce-quune-api",
     "title": "Masterclass API",
     "section": "Qu’est-ce qu’une API ?",
-    "text": "Qu’est-ce qu’une API ?\n\nUne API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.\nCNIL\n\n\nDéfinition peu informative\n\nPython, scikit-learn, Docker, etc. sont des APIs\nEn pratique, on signifie généralement une API REST"
+    "text": "Qu’est-ce qu’une API ?\n\n\n\nUne API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.\nCNIL\n\n\n\nDéfinition peu informative:\n\nPython, scikit-learn, Docker, etc. sont des APIs\nEn pratique, on signifie généralement une API REST"
   },
   {
     "objectID": "slides-data/api.html#les-apis-rest",
     "href": "slides-data/api.html#les-apis-rest",
     "title": "Masterclass API",
     "section": "Les APIs REST",
-    "text": "Les APIs REST\n\nAPI RESTful : API conforme au style d’architecture REST\n\nCommunication via le protocole HTTP\n\nEn pratique :\n\nOn requête un endpoint (ex : l’API de la BAN)\nAvec des requêtes HTTP (GET, POST, etc.) (ex : rues contenant “comédie”)"
+    "text": "Les APIs REST\n\n\nAPI RESTful : API conforme au style d’architecture REST\n\nCommunication via le protocole HTTP\n\n\n\n\nEn pratique :\n\nOn accède à un endpoint (ex : l’API de la BAN)\nAvec des requêtes HTTP (GET, POST, etc.) (ex : rues contenant “comédie”)"
   },
   {
     "objectID": "slides-data/api.html#analogie-avec-un-restaurant",
     "href": "slides-data/api.html#analogie-avec-un-restaurant",
     "title": "Masterclass API",
     "section": "Analogie avec un restaurant",
-    "text": "Analogie avec un restaurant\n\n💬 Vous passez commande\n\nRequête avec paramètres depuis , , votre navigateur…\n\n\n\n\n↔︎️ Le serveur transmet la commande en cuisine:\n\nPoint d’entrée de l’API\n\n\n\n\n\n🧑‍🍳 La cuisine prépare le plat\n\nLe serveur (informatique) fait les traitements ad hoc\n\n\n\n\n\n🍕 Vous recevez votre plat\n\nVous recevez une réponse au format JSON"
+    "text": "Analogie avec un restaurant\n\n\n💬 Vous passez commande\n\nRequête avec paramètres depuis , , votre navigateur…\n\n\n\n\n↔︎️ Le serveur transmet la commande en cuisine:\n\nPoint d’entrée de l’API\n\n\n\n\n\n🧑‍🍳 La cuisine prépare le plat\n\nLe serveur (informatique) fait les traitements ad hoc\n\n\n\n\n\n🍕 Vous recevez votre plat\n\nVous recevez une réponse au format JSON"
   },
   {
     "objectID": "slides-data/api.html#pourquoi-les-api",
     "href": "slides-data/api.html#pourquoi-les-api",
     "title": "Masterclass API",
     "section": "Pourquoi les API ?",
-    "text": "Pourquoi les API ?\n\nPraticité car permet de dissocier\n\nLe client: une interface web () ou un langage informatique (, , …)\nLe serveur: le moteur de calcul derrière\n\n\n\n\nSobriété: permet l’accès à la donnée voulue sans parcourir tout un fichier\n\n\n\n\nConfidentialité: on peut mettre des droits d’accès à certaines données\n\n\n\n\nUnversalité: pas d’a priori sur le mode d’accès"
+    "text": "Pourquoi les API ?\n\nPraticité car permet de dissocier:\n\nLe client: une interface web () ou un langage informatique (, , …)\nLe serveur: le moteur de calcul derrière\n\n\n\n\nSobriété: permet l’accès à la donnée voulue sans parcourir tout un fichier\n\n\n\n\nConfidentialité: on peut mettre des droits d’accès à certaines données\n\n\n\n\nUnversalité: pas d’a priori sur le mode d’accès"
   },
   {
     "objectID": "slides-data/api.html#les-api-de-données",
@@ -46,28 +46,42 @@
     "href": "slides-data/api.html#structuration-dune-requête",
     "title": "Masterclass API",
     "section": "Structuration d’une requête",
-    "text": "Structuration d’une requête\nLes requêtes prennent la forme d’URL:\n\\[\n\\underbrace{\\text{https://api-adresse.data.gouv.fr}}_{\\text{API root}}/\\underbrace{\\text{search}}_{\\text{API endpoint}}\n\\]\n\\[\n/?\\underbrace{\\text{q=88+avenue+verdier}}_{\\text{main parameter}}\\&\\underbrace{\\text{postcode=92120}}_{\\text{additional parameter}}\n\\]\nAuxquelles vont s’ajouter des headers (explication à venir)\n\nDémonstration interactive dans les exercices!"
+    "text": "Structuration d’une requête\nLes requêtes prennent la forme d’URI:\n\n\\[\n\\quad \\underbrace{\\text{https://api-adresse.data.gouv.fr}}_{\\text{API root}}/\\underbrace{\\text{search}}_{\\text{API endpoint}}\n\\]\n\\[\n\\quad /?\\underbrace{\\text{q=88+avenue+verdier}}_{\\text{main parameter}}\\&\\underbrace{\\text{postcode=92120}}_{\\text{additional parameter}}\n\\]\n\nAuxquelles vont s’ajouter des headers (explication à venir)\n\n\n\n\n\n\nNote\n\n\nDémonstration interactive"
   },
   {
     "objectID": "slides-data/api.html#les-requêtes-http",
     "href": "slides-data/api.html#les-requêtes-http",
     "title": "Masterclass API",
     "section": "Les requêtes HTTP",
-    "text": "Les requêtes HTTP\n\nGET: récupérer des données depuis un serveur web (lecture d’une base de données…)\nPOST: envoyer des données au serveur (formulaires de mise à jour de données, etc.)\nPython communique avec internet via le package requests (requests.get et requests.post)\n\n\n\n\n\n\n\nLes codes HTTP\n\n\n\n\nSignification des codes HTTP\n\n\n1xx : Informations\n2xx : Succès\n3xx : Redirections\n4xx : Erreurs côté client\n5xx : Erreurs côté serveur\n\n\n\n\nCodes à retenir\n\nCeux à retenir sont : 200 (succès), 400 (requête mal structurée), 401 (authentification non réussie), 403 (accès interdit), 404 (ressource demandée n’existe pas), 503 (le serveur n’est pas en capacité de répondre)"
+    "text": "Les requêtes HTTP\n\nGET: récupérer des données depuis un serveur web (lecture d’une base de données…)\nPOST: envoyer des données au serveur (formulaires de mise à jour de données, etc.)\nPython communique avec internet via le package requests (requests.get et requests.post)"
+  },
+  {
+    "objectID": "slides-data/api.html#les-codes-http",
+    "href": "slides-data/api.html#les-codes-http",
+    "title": "Masterclass API",
+    "section": "Les codes HTTP",
+    "text": "Les codes HTTP\n\nSignification des codes HTTP\n\n1xx : Informations\n2xx : Succès\n3xx : Redirections\n4xx : Erreurs côté client\n5xx : Erreurs côté serveur\n\n\n\n\n\n\n\n\nCodes à retenir\n\n\nCeux à retenir sont : 200 (succès), 400 (requête mal structurée), 401 (authentification nonréussie), 403 (accès interdit), 404 (ressource demandée n’existe pas), 503 (le serveur n’est pas en capacité de répondre)"
   },
   {
     "objectID": "slides-data/api.html#les-swaggers",
     "href": "slides-data/api.html#les-swaggers",
     "title": "Masterclass API",
     "section": "Les swaggers",
-    "text": "Les swaggers\n\n\n\nFormat standardisé de documentation\n\nGénéralement entrypoint /docs\n\nUtilisation interactive et exemples curl (ligne de commande)"
+    "text": "Les swaggers\n\n\n\nFormat standardisé de documentation\n\nGénéralement ${URL_ROOT}/docs\n\nUtilisation interactive:\n\nGénère des exemples curl (ligne de commande)"
+  },
+  {
+    "objectID": "slides-data/api.html#comment-connaître-les-paramètres-dune-api",
+    "href": "slides-data/api.html#comment-connaître-les-paramètres-dune-api",
+    "title": "Masterclass API",
+    "section": "Comment connaître les paramètres d’une API ?",
+    "text": "Comment connaître les paramètres d’une API ?\n\nSwagger {{&lt; iconify vscode-icons:file-type-swagger &gt;}}\n\n\n\nOutils développement navigateur (CTRL+MAJ+K sur ):\n\nOnglet réseau {{&lt; iconify uil:arrows-v &gt;}}\n\n\n\n\n\nPostman {{&lt; iconify vscode-icons:file-type-postman &gt;}}\n\n\n\n\nExtension {{&lt; iconify vscode-icons:file-type-vscode &gt;}} REST Client"
   },
   {
     "objectID": "slides-data/api.html#les-requêtes-get",
     "href": "slides-data/api.html#les-requêtes-get",
     "title": "Masterclass API",
     "section": "Les requêtes GET",
-    "text": "Les requêtes GET\n\nRequête la plus commune\n\n\n\nTransformation en objet  (JSON -&gt; dict) est naturelle\n\n\n\n\nFormattage dépend de chaque API (lire la doc ! 👮)\n\n\n\n\nRetravailler l’output peut être lourd\n\nimport requests\nadresse = \"88 avenue verdier\"\nurl_ban_example = f\"https://api-adresse.data.gouv.fr/search/?q={adresse.replace(\" \", \"+\")}&postcode=92120\"\nrequests.get(url_ban_example).json()"
+    "text": "Les requêtes GET\n\n\n\nRequête la plus commune\n\n\n\nTransformation en objet  (JSON -&gt; dict) est naturelle\n\n\n\n\nFormattage dépend de chaque API (lire la doc ! 👮)\n\n\n\n\nRetravailler l’output peut être lourd\n\nimport requests\nadresse = \"88 avenue verdier\"\nurl_ban_example = (\n    f\"https://api-adresse.data.gouv.fr/search/\"\n    f\"?q={adresse.replace(\" \", \"+\")}&postcode=92120\"\n)\nrequests.get(url_ban_example).json()"
   },
   {
     "objectID": "slides-data/api.html#les-requêtes-post",

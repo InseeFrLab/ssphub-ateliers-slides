@@ -7,10 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+  <meta name="generator" content="quarto-1.6.43">
 
   <meta name="author" content="Lino Galiana">
   <meta name="dcterms.date" content="2025-09-04">
@@ -222,12 +222,15 @@
 </section>
 <section id="quest-ce-quune-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Qu’est-ce qu’une API ?</h2>
+<p><br></p>
+<div style="font-size: 70%;">
 <blockquote>
-<p>Une API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.</p>
+<p><span class="smaller">Une API (application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.</span></p>
 <p><a href="https://www.cnil.fr/fr/definition/interface-de-programmation-dapplication-api">CNIL</a></p>
 </blockquote>
+</div>
 <ul>
-<li>Définition peu informative
+<li>Définition peu informative:
 <ul>
 <li><code>Python</code>, <code>scikit-learn</code>, <code>Docker</code>, etc. sont des APIs</li>
 <li>En pratique, on signifie généralement une <span class="blue2"><strong>API REST</strong></span></li>
@@ -236,20 +239,26 @@
 </section>
 <section id="les-apis-rest" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Les APIs REST</h2>
+<p><br></p>
 <ul>
 <li><span class="orange"><strong>API RESTful</strong></span> : API conforme au style d’architecture <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>
 <ul>
 <li>Communication via le <span class="blue2"><strong>protocole HTTP</strong></span></li>
 </ul></li>
+</ul>
+<div class="fragment">
+<ul>
 <li>En pratique :
 <ul>
-<li>On requête un <span class="blue2"><strong>endpoint</strong></span> (ex : <a href="https://api-adresse.data.gouv.fr/search/">l’API de la BAN</a>)</li>
+<li>On accède à un <span class="blue2"><strong>endpoint</strong></span> (ex : <a href="https://api-adresse.data.gouv.fr/search/">l’API de la BAN</a>)</li>
 <li>Avec des <span class="blue2"><strong>requêtes HTTP</strong></span> (<code>GET</code>, <code>POST</code>, etc.) (ex : <a href="https://api-adresse.data.gouv.fr/search/?q=comédie&amp;type=street">rues contenant “comédie”</a>)</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="analogie-avec-un-restaurant" class="slide level2 smaller" data-background-image="background.svg" data-background-size="contain">
 <h2>Analogie avec un restaurant</h2>
+<p><br></p>
 <ul>
 <li>💬 <strong><span class="orange">Vous passez commande</span></strong>
 <ul>
@@ -284,7 +293,7 @@
 <section id="pourquoi-les-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Pourquoi les API ?</h2>
 <ul>
-<li><span class="blue2"><em>Praticité</em></span> car permet de dissocier
+<li><span class="blue2"><em>Praticité</em></span> car permet de dissocier:
 <ul>
 <li>Le <strong><span class="orange">client</span></strong>: une interface web (<i class="fa-brands fa-firefox" aria-label="firefox"></i>) ou un langage informatique (<i class="fa-brands fa-python" aria-label="python"></i>, <i class="fa-brands fa-r-project" aria-label="r-project"></i>, <i class="fa-brands fa-js-square" aria-label="js-square"></i>…)</li>
 <li>Le <strong><span class="orange">serveur</span></strong>: le moteur de calcul derrière</li>
@@ -308,6 +317,7 @@
 </section>
 <section id="les-api-de-données" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Les API de données</h2>
+<p><br></p>
 
 <img data-src="./images/serveur-modele-no-bg.png" class="r-stretch"></section>
 <section id="les-api-de-données-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
@@ -344,16 +354,28 @@
 </section>
 <section id="structuration-dune-requête" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Structuration d’une requête</h2>
-<p>Les requêtes prennent la forme d’URL:</p>
+<p>Les requêtes prennent la forme d’<strong><span class="blue2">URI</span></strong>:</p>
+<div style="text-align: left !important;">
 <p><span class="math display">\[
-\underbrace{\text{https://api-adresse.data.gouv.fr}}_{\text{API root}}/\underbrace{\text{search}}_{\text{API endpoint}}
+\quad \underbrace{\text{https://api-adresse.data.gouv.fr}}_{\text{API root}}/\underbrace{\text{search}}_{\text{API endpoint}}
 \]</span></p>
 <p><span class="math display">\[
-/?\underbrace{\text{q=88+avenue+verdier}}_{\text{main parameter}}\&amp;\underbrace{\text{postcode=92120}}_{\text{additional parameter}}
+\quad /?\underbrace{\text{q=88+avenue+verdier}}_{\text{main parameter}}\&amp;\underbrace{\text{postcode=92120}}_{\text{additional parameter}}
 \]</span></p>
-<p>Auxquelles vont s’ajouter des <em>headers</em> (explication à venir)</p>
-<div class="note">
-<p>Démonstration interactive dans les exercices!</p>
+</div>
+<p>Auxquelles vont s’ajouter des <span class="blue2"><strong><em>headers</em></strong></span> (explication à venir)</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><a href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.html">Démonstration interactive</a></p>
+</div>
+</div>
 </div>
 </section>
 <section id="les-requêtes-http" class="slide level2" data-background-image="background.svg" data-background-size="contain">
@@ -363,33 +385,29 @@
 <li><code>POST</code>: envoyer des données au serveur (formulaires de mise à jour de données, etc.)</li>
 <li><code>Python</code> communique avec internet via le <strong><em>package</em> <code>requests</code></strong> (<code>requests.get</code> et <code>requests.post</code>)</li>
 </ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Les codes HTTP</strong></p>
-</div>
-<div class="callout-content">
-<details>
-<summary>
-Signification des codes HTTP
-</summary>
+</section>
+<section id="les-codes-http" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Les codes HTTP</h2>
+<ul>
+<li>Signification des codes HTTP
 <ul>
 <li>1xx : Informations</li>
 <li>2xx : Succès</li>
 <li>3xx : Redirections</li>
 <li>4xx : Erreurs côté client</li>
 <li>5xx : Erreurs côté serveur</li>
+</ul></li>
 </ul>
-</details>
-<details>
-<summary>
-Codes à retenir
-</summary>
-<p>Ceux à retenir sont : <span class="blue2"><strong>200</strong></span> (succès), <span class="blue2"><strong>400</strong></span> (requête mal structurée), <span class="blue2"><strong>401</strong></span> (authentification non réussie), <span class="blue2"><strong>403</strong></span> (accès interdit), <span class="blue2"><strong>404</strong></span> (ressource demandée n’existe pas), <span class="blue2"><strong>503</strong></span> (le serveur n’est pas en capacité de répondre)</p>
-</details>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Codes à retenir</strong></p>
+</div>
+<div class="callout-content">
+<p>Ceux à retenir sont : <span class="blue2"><strong>200</strong></span> (succès), <span class="blue2"><strong>400</strong></span> (requête mal structurée), <span class="blue2"><strong>401</strong></span> (authentification nonréussie), <span class="blue2"><strong>403</strong></span> (accès interdit), <span class="blue2"><strong>404</strong></span> (ressource demandée n’existe pas), <span class="blue2"><strong>503</strong></span> (le serveur n’est pas en capacité de répondre)</p>
 </div>
 </div>
 </div>
@@ -401,15 +419,42 @@ Codes à retenir
 <ul>
 <li>Format standardisé de documentation
 <ul>
-<li>Généralement entrypoint <code>/docs</code></li>
+<li>Généralement <code>${URL_ROOT}/docs</code></li>
 </ul></li>
-<li>Utilisation interactive et exemples <code>curl</code> (ligne de commande)</li>
+<li>Utilisation interactive:
+<ul>
+<li>Génère des exemples <code>curl</code> (ligne de commande)</li>
+</ul></li>
 </ul>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:36%;">
 <p><img data-src="https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png"></p>
 </div></div>
+</section>
+<section id="comment-connaître-les-paramètres-dune-api" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Comment connaître les paramètres d’une API ?</h2>
+<ul>
+<li><em>Swagger</em> {{&lt; iconify vscode-icons:file-type-swagger &gt;}}</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Outils développement navigateur (<kbd>CTRL</kbd>+<kbd>MAJ</kbd>+<kbd>K</kbd> sur <i class="fa-brands fa-firefox" aria-label="firefox"></i>):
+<ul>
+<li>Onglet réseau {{&lt; iconify uil:arrows-v &gt;}}</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><a href="https://www.postman.com/"><code>Postman</code></a> {{&lt; iconify vscode-icons:file-type-postman &gt;}}</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Extension {{&lt; iconify vscode-icons:file-type-vscode &gt;}} <a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a></li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="partie-pratique" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
@@ -417,7 +462,9 @@ Codes à retenir
 
 </section>
 <section id="les-requêtes-get" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Les requêtes <code>GET</code></h2>
+<h2>Les requêtes <span class="blue2"><code>GET</code></span></h2>
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
+<p><br></p>
 <ul>
 <li>Requête la plus commune</li>
 </ul>
@@ -437,8 +484,11 @@ Codes à retenir
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a></a>adresse <span class="op">=</span> <span class="st">"88 avenue verdier"</span></span>
-<span id="cb1-3"><a></a>url_ban_example <span class="op">=</span> <span class="ss">f"https://api-adresse.data.gouv.fr/search/?q=</span><span class="sc">{</span>adresse<span class="sc">.</span>replace(<span class="st">" "</span>, <span class="st">"+"</span>)<span class="sc">}</span><span class="ss">&amp;postcode=92120"</span></span>
-<span id="cb1-4"><a></a>requests.get(url_ban_example).json()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a></a>url_ban_example <span class="op">=</span> (</span>
+<span id="cb1-4"><a></a>    <span class="ss">f"https://api-adresse.data.gouv.fr/search/"</span></span>
+<span id="cb1-5"><a></a>    <span class="ss">f"?q=</span><span class="sc">{</span>adresse<span class="sc">.</span>replace(<span class="st">" "</span>, <span class="st">"+"</span>)<span class="sc">}</span><span class="ss">&amp;postcode=92120"</span></span>
+<span id="cb1-6"><a></a>)</span>
+<span id="cb1-7"><a></a>requests.get(url_ban_example).json()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="les-requêtes-post" class="slide level2" data-background-image="background.svg" data-background-size="contain">
