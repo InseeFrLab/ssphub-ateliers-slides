@@ -463,8 +463,7 @@
 </section>
 <section id="les-requêtes-get" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Les requêtes <span class="blue2"><code>GET</code></span></h2>
-<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
-<p><br></p>
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
 <ul>
 <li>Requête la plus commune</li>
 </ul>
@@ -493,9 +492,13 @@
 </section>
 <section id="les-requêtes-post" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Les requêtes <code>POST</code></h2>
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
 <ul>
-<li><p>Plus complexe mais <code>requests</code> est suffisamment flexible</p></li>
-<li><p>Plus compliqué est de rentrer les objets <code>Python</code> dans le cadre de l’API</p></li>
+<li><p>Envoyer des données utiles à l’API</p></li>
+<li><p>Plus complexe mais <code>Requests</code> est flexible</p>
+<ul>
+<li>Transformer les objets <i class="fa-brands fa-python" aria-label="python"></i> en <em>input</em> de l’API</li>
+</ul></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>params <span class="op">=</span> {</span>
 <span id="cb2-2"><a></a>    <span class="st">"columns"</span>: [<span class="st">"adresse"</span>, <span class="st">"Nom_commune"</span>],</span>
@@ -518,32 +521,49 @@
 <h2>Bonnes pratiques</h2>
 <p><span class="orange"><strong>La doctrine générale</strong></span></p>
 
-<img data-src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/environment_clean.png" class="r-stretch"></section>
+<img data-src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/environment_clean.png" class="r-stretch"><p><em>Source: <a href="https://ensae-reproductibilite.github.io/">Cours de l’ENSAE de mise en production</a></em></p>
+</section>
 <section id="bonnes-pratiques-pour-les-secrets" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Bonnes pratiques pour les secrets</h2>
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB02_pandas_intro%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Flinogaliana%2Fpython-datascientist%2Fmain%2Fsspcloud%2Finit-vscode.sh%C2%BB&amp;init.personalInitArgs=%C2%ABmanipulation%2002_pandas_intro%20correction%C2%BB"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a><br>
 <ol type="1">
-<li>Boite de dialogue via <code>getpass</code> (application interactive uniquement)</li>
-<li>Variables d’environnement:
+<li><strong><span class="orange">Boite de dialogue</span></strong> via <a href="https://docs.python.org/3/library/getpass.html"><code>getpass</code></a> (application interactive uniquement)</li>
+</ol>
+<div class="fragment">
+<ol start="2" type="1">
+<li><strong><span class="orange">Variables d’environnement</span></strong>:
 <ul>
-<li>Dans un fichier <code>.env</code> (non committé!)</li>
-<li>Dans les secrets de l’intégration continue</li>
+<li>Dans un <span class="blue2">fichier <code>.env</code></span> (non committé!) lu avec <a href="https://pypi.org/project/python-dotenv/"><code>dotenv</code></a></li>
+<li>Dans les <span class="blue2">secrets</span> de l’intégration continue (cf.&nbsp;<a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions">doc <i class="fa-brands fa-github" aria-label="github"></i></a>)</li>
 </ul></li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
 <span id="cb3-2"><a></a>load_dotenv()</span>
 <span id="cb3-3"><a></a>token <span class="op">=</span> os.getenv(<span class="st">"MON_PETIT_JETON"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="conclusion" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Conclusion</h2>
 <ul>
-<li><p>Pratique pour récupérer des données ponctuelles:</p>
+<li><span class="orange"><strong>Pratique</strong></span> pour récupérer des <strong><span class="orange">données ponctuelles</span></strong>:
 <ul>
-<li>Afficher un nombre limité d’enregistrements dans une application</li>
-<li>Récupérer des données issues d’un processus de transformation complexe</li>
+<li>Afficher un <strong><span class="blue2">nombre limité d’enregistrements</span></strong> dans une application</li>
+<li>Récupérer des données issues d’un <span class="blue2"><strong>processus de transformation complexe</strong></span></li>
 </ul></li>
-<li><p>Limitées en termes de volumétrie ou stabilité d’accès</p></li>
-<li><p>Code très adhérant à une API et un langage client</p></li>
 </ul>
+<div class="fragment">
+<ul>
+<li><strong><span class="orange">Limitées</span></strong> en termes de <span class="blue2"><strong>volumétrie</strong></span> ou <strong><span class="blue2">stabilité d’accès</span></strong></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong><span class="orange">Code très adhérant</span></strong> à une API et un langage client</li>
+</ul>
+</div>
+</section>
+<section id="des-questions" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Des questions ?</h2>
 
 
 </section></section>
