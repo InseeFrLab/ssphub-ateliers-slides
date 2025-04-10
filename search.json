@@ -95,7 +95,7 @@
     "href": "slides-data/api.html#quest-ce-quune-api",
     "title": "Les API",
     "section": "Qu’est-ce qu’une API ?",
-    "text": "Qu’est-ce qu’une API ?\n\n::: {style=“font-size: 70\n\nUne APplication programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.\nCNIL\n\n:::\n\nDéfinition peu informative:\n\nPython, scikit-learn, Docker, etc. sont des APIs\nEn pratique, on signifie généralement une API REST"
+    "text": "Qu’est-ce qu’une API ?\n\n\n\nUne Application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.\nCNIL\n\n\n\nDéfinition peu informative:\n\nPython, scikit-learn, Docker, etc. sont des APIs\nEn pratique, on signifie généralement une API REST"
   },
   {
     "objectID": "slides-data/api.html#les-apis-rest",
