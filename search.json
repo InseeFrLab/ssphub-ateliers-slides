@@ -18,14 +18,14 @@
     "href": "slides-data/index.html#pour-traiter-la-volumétrie",
     "title": "Le format de données Parquet",
     "section": "Pour traiter la volumétrie",
-    "text": "Pour traiter la volumétrie\n\nUtiliser une infra de stockage adaptée (S3)\nUtiliser un format de données adapté (Parquet)\nUtiliser des outils informatiques adaptés\n\nSuffisant la plupart du temps : calcul larger than memory optimisé (Arrow / DuckDB)\nSi volumétrie massive : calcul distribué (Spark)"
+    "text": "Pour traiter la volumétrie\n\nUtiliser un format de données adapté (Parquet)\n\n\n\nUtiliser des outils informatiques adaptés\n\nSuffisant la plupart du temps : calcul larger than memory optimisé (Arrow / DuckDB)\nSi volumétrie massive : calcul distribué (Spark)\n\n\n\n\n\nUtiliser une infra de stockage adaptée (S3)\n\n\n\n\n\n\n\n\n\nNote\n\n\nNous allons voir comment ces trois points sont complémentaires."
   },
   {
     "objectID": "slides-data/index.html#big-data-is-dead",
     "href": "slides-data/index.html#big-data-is-dead",
     "title": "Le format de données Parquet",
     "section": "“Big Data is dead” ?",
-    "text": "“Big Data is dead” ?\n\nJordan Tigani : Big Data is dead\n\n“The big data frontier keeps receding”\n“Most people don’t have that much data”\n“Most data is rarely queried”\n\nPlaidoyer pour une parcimonie…\n\n… qui facilite la mise en production !"
+    "text": "“Big Data is dead” ?\n\nJordan Tigani : Big Data is dead\n\n“The big data frontier keeps receding”\n“Most people don’t have that much data”\n“Most data is rarely queried”\n\n\n\n\nPlaidoyer pour une parcimonie…\n\n… qui facilite la mise en production !"
   },
   {
     "objectID": "slides-data/index.html#enjeux-1",
@@ -39,7 +39,7 @@
     "href": "slides-data/index.html#formats-traditionnels",
     "title": "Le format de données Parquet",
     "section": "Formats traditionnels",
-    "text": "Formats traditionnels\n\nFormats de données adhérents à un langage (sas7bdat, RDS, fst, etc.)\n\nNon-interopérables -&gt; à éviter !\n\nLe format CSV\n\nInteropérable et simple d’utilisation\nPas de gestion des méta-données\nPeu adapté aux données volumineuses"
+    "text": "Formats traditionnels\n\nFormats de données adhérents à un langage (sas7bdat, RDS, fst, etc.)\n\nNon-interopérables -&gt; à éviter !\n\n\n\n\nLe format CSV\n\nInteropérable et simple d’utilisation\nPas de gestion des méta-données\nPeu adapté aux données volumineuses"
   },
   {
     "objectID": "slides-data/index.html#limites-du-csv",
@@ -56,36 +56,99 @@
     "text": "Un format léger \n\nStockage :\n\nCompression : entre 5 et 20 fois plus léger qu’un CSV\n\n\n\n\n\n\n\n\n\n\nExemple: Recensement de la Population\n\n\n\nFicher détail : 20 millions de lignes, 92 variables\n\nCSV: &gt; 4Go\nParquet: &lt; 500Mo"
   },
   {
+    "objectID": "slides-data/index.html#un-format-efficace",
+    "href": "slides-data/index.html#un-format-efficace",
+    "title": "Le format de données Parquet",
+    "section": "Un format efficace",
+    "text": "Un format efficace\n\nLecture :\n\nJusqu’à 34x plus rapide qu’un CSV\n\n\n\n\n“Orienté colonne”\n\nOptimisé pour les traitements analytiques\nLimite la quantité de données à mettre en mémoire\nConçu pour être écrit une fois mais lu fréquemment"
+  },
+  {
+    "objectID": "slides-data/index.html#pour-optimiser-la-lecture",
+    "href": "slides-data/index.html#pour-optimiser-la-lecture",
+    "title": "Le format de données Parquet",
+    "section": "Pour optimiser la lecture",
+    "text": "Pour optimiser la lecture\n\nPartitionner ou ordonner les données\n\n\n\n\n\n\n\n\n\n\n\n\n\nL’art de bien partitionner\n\n\n\nPartitionner par une/des variable(s) d’intérêt si gros fichier\n\nEviter de créer de nombreux petits (&lt; 128Mo) fichiers\n\nSinon ordonner les données avant d’écrire le fichier (cf. Eric Mauvière)"
+  },
+  {
+    "objectID": "slides-data/index.html#un-format-universel-et-fiable",
+    "href": "slides-data/index.html#un-format-universel-et-fiable",
+    "title": "Le format de données Parquet",
+    "section": "Un format universel et fiable",
+    "text": "Un format universel et fiable\n\nGestion native des méta-données\n\nDéfinition automatique d’un schéma (noms, types)\nMise à disposition plus robuste\n\n\n\n\nInteropérable\n\n\n\n\nOpen-source\n\n\n\n\nNon lisible par un humain mais de plus en plus de visualiseurs en ligne\n\nPar exemple sur le SSPCloud"
+  },
+  {
+    "objectID": "slides-data/index.html#parquet-quels-avantages",
+    "href": "slides-data/index.html#parquet-quels-avantages",
+    "title": "Le format de données Parquet",
+    "section": "Parquet: quels avantages ?",
+    "text": "Parquet: quels avantages ?\n\nFormat libre, open source et indépendant du langage ;\n\nLes formats propriétaires imposent des outils aux consommateurs !\n\nPlus de confort pour les utilisateurs:\n\nDes requêtes plus rapides et efficaces: seulement les données nécessaires sont lues\nDes données conformes à la mise à disposition par le producteur"
+  },
+  {
+    "objectID": "slides-data/index.html#parquet-quels-usages",
+    "href": "slides-data/index.html#parquet-quels-usages",
+    "title": "Le format de données Parquet",
+    "section": "Parquet: quels usages ?",
+    "text": "Parquet: quels usages ?\n\nFormat privilégié pour la mise à disposition de données internes à l’Insee:\n\nMoins d’asymétries entre utilisateurs et producteurs.\n\n\n\n\n\n\n\n\n\nPremières diffusions à l’externe\n\n\n\nBureaux de votes du répertoire électoral unique (REU):\nRecensement de la population (RP)\nBase permanente des équipements (BPE)"
+  },
+  {
+    "objectID": "slides-data/index.html#parquet-quels-usages-1",
+    "href": "slides-data/index.html#parquet-quels-usages-1",
+    "title": "Le format de données Parquet",
+    "section": "Parquet: quels usages ?",
+    "text": "Parquet: quels usages ?\n\n\n\n\n\n\nExemples de cartes pouvant être produites simplement avec les données du recensement diffusées par l’Insee"
+  },
+  {
+    "objectID": "slides-data/index.html#enjeu",
+    "href": "slides-data/index.html#enjeu",
+    "title": "Le format de données Parquet",
+    "section": "Enjeu",
+    "text": "Enjeu\n\nParquet ne résout pas tout\n\nL’espace disque est optimisé\nLes données décompressées doivent passer en RAM\n\n\n\n\nLe framework adapté dépend de la volumétrie\n\nPour la plupart des besoins : Arrow et DuckDB"
+  },
+  {
+    "objectID": "slides-data/index.html#les-frameworks",
+    "href": "slides-data/index.html#les-frameworks",
+    "title": "Le format de données Parquet",
+    "section": "Les frameworks",
+    "text": "Les frameworks\n\nDeux frameworks de référence : Arrow et DuckDB\n\nOrientation fichier (Arrow) VS orientation BDD (DuckDB)\n\n\n\n\nTraitement en-mémoire optimisé\n\nOrientés-colonne\nLazy evaluation (prochaine slide)\n\n\n\n\n\nTrès bonne intégration:\n\nAvec le tidyverse ()\nAvec le système de stockage S3"
+  },
+  {
+    "objectID": "slides-data/index.html#les-frameworks-1",
+    "href": "slides-data/index.html#les-frameworks-1",
+    "title": "Le format de données Parquet",
+    "section": "Les frameworks",
+    "text": "Les frameworks"
+  },
+  {
+    "objectID": "slides-data/index.html#la-lazy-evaluation",
+    "href": "slides-data/index.html#la-lazy-evaluation",
+    "title": "Le format de données Parquet",
+    "section": "La lazy evaluation",
+    "text": "La lazy evaluation\n\nLes frameworks comme Arrow ou DuckDB n’exécutent pas immédiatement les opérations\n\n\n\nLes instructions sont optimisées avant exécution\n\nVous écrivez un plan d’exécution, réinterprété\n\n\n\n\n\nAvantages :\n\nMoins de données manipulées inutilement\nMoins de RAM consommée\nExécution plus rapide car optimisée"
+  },
+  {
+    "objectID": "slides-data/index.html#la-lazy-evaluation-1",
+    "href": "slides-data/index.html#la-lazy-evaluation-1",
+    "title": "Le format de données Parquet",
+    "section": "La lazy evaluation",
+    "text": "La lazy evaluation\n\n\n\n\n\n\n\nExemple d’une requête lazy\n\n\nEn supposant qu’achille est un objet Arrow ou DuckDB:\nn_logements_depcom &lt;- achille |&gt;\n1  filter(dep %in% c(\"01\", \"02\", \"03\")) |&gt;\n2  select(idlogement, depcom) |&gt;\n  group_by(depcom) |&gt;\n  summarise(n_logements = n()) |&gt;\n3  collect()\n\n1\n\nRécupère seulement les données nécessaires\n\n2\n\nRécupère seulement les variables nécessaires\n\n3\n\nLes calculs ne sont effectués qu’à cette étape !"
+  },
+  {
+    "objectID": "slides-data/index.html#la-lazy-evaluation-2",
+    "href": "slides-data/index.html#la-lazy-evaluation-2",
+    "title": "Le format de données Parquet",
+    "section": "La lazy evaluation",
+    "text": "La lazy evaluation\n\nVoici le début du plan:\n\n\n❓️ Pourrait-il être optimisé ?"
+  },
+  {
+    "objectID": "slides-data/index.html#la-lazy-evaluation-3",
+    "href": "slides-data/index.html#la-lazy-evaluation-3",
+    "title": "Le format de données Parquet",
+    "section": "La lazy evaluation",
+    "text": "La lazy evaluation\n\nVoici le plan plus optimal:\n\nPredicate pushdown"
+  },
+  {
     "objectID": "slides-data/index.html#le-format-parquet",
     "href": "slides-data/index.html#le-format-parquet",
-    "title": "Le format de données Parquet",
-    "section": "Le format Parquet",
-    "text": "Le format Parquet\n\nLecture :\n\nJusqu’à 34x plus rapide qu’un CSV\n\n“Orienté colonne”\n\nOptimisé pour les traitements analytiques\nLimite la quantité de données à mettre en mémoire"
-  },
-  {
-    "objectID": "slides-data/index.html#le-format-parquet-1",
-    "href": "slides-data/index.html#le-format-parquet-1",
-    "title": "Le format de données Parquet",
-    "section": "Le format Parquet",
-    "text": "Le format Parquet\n\nPartitionner les données pour optimiser la lecture\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nL’art de bien partitionner\n\n\n\nPartitionner par une/des variable(s) d’intérêt\nEviter de créer de nombreux petits (&lt; 128Mo) fichiers"
-  },
-  {
-    "objectID": "slides-data/index.html#le-format-parquet-2",
-    "href": "slides-data/index.html#le-format-parquet-2",
-    "title": "Le format de données Parquet",
-    "section": "Le format Parquet",
-    "text": "Le format Parquet\n\nGestion native des méta-données\n\nDéfinition automatique d’un schéma (noms, types)\nMise à disposition plus robuste\n\nInteropérable\nOpen-source"
-  },
-  {
-    "objectID": "slides-data/index.html#le-format-parquet-3",
-    "href": "slides-data/index.html#le-format-parquet-3",
-    "title": "Le format de données Parquet",
-    "section": "Le format Parquet",
-    "text": "Le format Parquet\n\nDeux frameworks de référence : Arrow et DuckDB\n\nOrientation fichier (Arrow) VS orientation BDD (DuckDB)\nTrès bonne intégration avec le tidyverse\n\nTraitement en-mémoire optimisé\n\nOrientés-colonne\nLazy evaluation\n\n\n\n\n\n\n\n\n\n\nExemple d’une requête lazy\n\n\nn_logements_depcom &lt;- achille |&gt;\n  filter(dep %in% c(\"01\", \"02\", \"03\")) |&gt;  # Récupère seulement les données nécessaires\n  select(idlogement, depcom) |&gt;  # Récupère seulement les colonnes nécessaires\n  group_by(depcom) |&gt;\n  summarise(n_logements = n()) |&gt;\n  collect()  # Les calculs ne sont effectués qu'à cette étape !"
-  },
-  {
-    "objectID": "slides-data/index.html#le-format-parquet-4",
-    "href": "slides-data/index.html#le-format-parquet-4",
     "title": "Le format de données Parquet",
     "section": "Le format Parquet",
     "text": "Le format Parquet\n\nParquet gagne sur tous les tableaux"

@@ -7,7 +7,9 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script><meta charset="utf-8">
+<script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.43">
 
   <meta name="author" content="Lino Galiana">
@@ -241,29 +243,56 @@ Lino Galiana
 <section id="pour-traiter-la-volumétrie" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Pour traiter la volumétrie</h2>
 <ul>
-<li><p>Utiliser une <span class="orange"><strong>infra de stockage</strong></span> adaptée (<code>S3</code>)</p></li>
-<li><p>Utiliser un <span class="orange"><strong>format</strong></span> de données adapté (<code>Parquet</code>)</p></li>
-<li><p>Utiliser des <span class="orange"><strong>outils</strong></span> informatiques adaptés</p>
+<li>Utiliser un <span class="orange"><strong>format</strong></span> de données adapté (<code>Parquet</code>)</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Utiliser des <span class="orange"><strong>outils</strong></span> informatiques adaptés
 <ul>
 <li>Suffisant la plupart du temps : <span class="blue2"><strong>calcul <em>larger than memory</em> optimisé</strong></span> (<code>Arrow</code> / <code>DuckDB</code>)</li>
 <li>Si volumétrie massive : <span class="blue2"><strong>calcul distribué</strong></span> (<code>Spark</code>)</li>
 </ul></li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Utiliser une <span class="orange"><strong>infra de stockage</strong></span> adaptée (<code>S3</code>)</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Nous allons voir comment ces trois points sont complémentaires.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="big-data-is-dead" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>“Big Data is dead” ?</h2>
 <ul>
 <li>Jordan Tigani : <a href="https://motherduck.com/blog/big-data-is-dead/">Big Data is dead</a>
 <ul>
-<li>“The big data frontier keeps receding”</li>
-<li>“Most people don’t have that much data”</li>
-<li>“Most data is rarely queried”</li>
+<li><em>“The big data frontier keeps receding”</em></li>
+<li><em>“Most people don’t have that much data”</em></li>
+<li><em>“Most data is rarely queried”</em></li>
 </ul></li>
+</ul>
+<div class="fragment">
+<ul>
 <li>Plaidoyer pour une <span class="orange"><strong>parcimonie</strong></span>…
 <ul>
 <li>… qui <span class="blue2"><strong>facilite la mise en production</strong></span> !</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section>
 <section id="pourquoi-le-format-parquet" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
@@ -289,6 +318,9 @@ Lino Galiana
 <ul>
 <li><span class="blue2"><strong>Non-interopérables</strong></span> -&gt; à éviter !</li>
 </ul></li>
+</ul>
+<div class="fragment">
+<ul>
 <li>Le format <span class="orange"><strong>CSV</strong></span>
 <ul>
 <li><span class="blue2"><strong>Interopérable</strong></span> et <span class="blue2"><strong>simple</strong></span> d’utilisation</li>
@@ -296,16 +328,17 @@ Lino Galiana
 <li>Peu adapté aux <span class="blue2"><strong>données volumineuses</strong></span></li>
 </ul></li>
 </ul>
+</div>
 </section>
-<section id="limites-du-csv" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<section id="limites-du-csv" class="slide level2 incremental" data-background-image="background.svg" data-background-size="contain">
 <h2>Limites du <code>CSV</code></h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <ul>
-<li class="fragment">Des <span class="orange"><strong>performances limitées</strong></span>
+<li>Des <span class="orange"><strong>performances limitées</strong></span>
 <ul>
-<li class="fragment"><span class="blue2"><strong>Stockage</strong></span> : non-compressé -&gt; <span class="blue2"><strong>espace disque élevé</strong></span></li>
-<li class="fragment"><span class="blue2"><strong>Lecture</strong></span> : “orienté-ligne” -&gt; <span class="blue2"><strong>performances faibles</strong></span></li>
+<li><span class="blue2"><strong>Stockage</strong></span> : non-compressé -&gt; <span class="blue2"><strong>espace disque élevé</strong></span></li>
+<li><span class="blue2"><strong>Lecture</strong></span> : “orienté-ligne” -&gt; <span class="blue2"><strong>performances faibles</strong></span></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:30%;">
@@ -360,36 +393,40 @@ Lino Galiana
 </div>
 </div>
 </section>
-<section id="le-format-parquet" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Le format <code>Parquet</code></h2>
+<section id="un-format-efficace" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Un format efficace</h2>
 <ul>
 <li><span class="orange"><strong>Lecture</strong></span> :
 <ul>
 <li>Jusqu’à 34x plus rapide qu’un CSV</li>
 </ul></li>
+</ul>
+<div class="fragment">
+<ul>
 <li><span class="orange"><strong>“Orienté colonne”</strong></span>
 <ul>
 <li>Optimisé pour les <span class="blue2"><strong>traitements analytiques</strong></span></li>
 <li>Limite la quantité de données à mettre en mémoire</li>
+<li>Conçu pour être écrit une fois mais lu fréquemment</li>
 </ul></li>
 </ul>
+</div>
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="./images/parquet-read-columns.png" class="quarto-figure quarto-figure-center"></p>
+<p><img data-src="../slides-data/images/parquet-read-columns.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div>
 </section>
-<section id="le-format-parquet-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Le format <code>Parquet</code></h2>
+<section id="pour-optimiser-la-lecture" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Pour optimiser la lecture</h2>
 <ul>
-<li><span class="orange"><strong>Partitionner</strong></span> les données pour <span class="blue2"><strong>optimiser la lecture</strong></span></li>
+<li><span class="orange"><strong>Partitionner</strong></span> ou <span class="orange"><strong>ordonner</strong></span> les données</li>
 </ul>
-<div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="./images/partitions.png" class="quarto-figure quarto-figure-center" height="250"></p>
+<p><img data-src="https://ensae-reproductibilite.github.io/slides/img/partitions.png" class="quarto-figure quarto-figure-center" height="230"></p>
 </figure>
 </div>
 <div>
@@ -403,42 +440,182 @@ Lino Galiana
 </div>
 <div class="callout-content">
 <ul>
-<li><p>Partitionner par une/des <span class="blue2"><strong>variable(s) d’intérêt</strong></span></p></li>
-<li><p><span class="blue2"><strong>Eviter</strong></span> de créer de <span class="blue2"><strong>nombreux petits (&lt; 128Mo) fichiers</strong></span></p></li>
+<li>Partitionner par une/des <span class="blue2"><strong>variable(s) d’intérêt</strong></span> si gros fichier
+<ul>
+<li><span class="blue2"><strong>Eviter</strong></span> de créer de <span class="blue2"><strong>nombreux petits (&lt; 128Mo) fichiers</strong></span></li>
+</ul></li>
+<li>Sinon ordonner les données avant d’écrire le fichier (cf.&nbsp;<a href="https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/">Eric Mauvière</a>)</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</div>
 </section>
-<section id="le-format-parquet-2" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Le format <code>Parquet</code></h2>
+<section id="un-format-universel-et-fiable" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Un format universel et fiable</h2>
 <ul>
-<li><p>Gestion native des <span class="orange"><strong>méta-données</strong></span></p>
+<li>Gestion native des <span class="orange"><strong>méta-données</strong></span>
 <ul>
 <li>Définition automatique d’un <span class="blue2"><strong>schéma</strong></span> (noms, types)</li>
 <li>Mise à disposition plus <span class="blue2"><strong>robuste</strong></span></li>
 </ul></li>
-<li><p><span class="orange"><strong>Interopérable</strong></span></p></li>
-<li><p><span class="orange"><strong>Open-source</strong></span></p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span class="orange"><strong>Interopérable</strong></span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><span class="orange"><strong>Open-source</strong></span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Non lisible par un humain mais de plus en plus de visualiseurs en ligne
+<ul>
+<li>Par exemple sur le <a href="https://datalab.sspcloud.fr/data-explorer">SSPCloud</a> <i class="fa-solid fa-dragon" aria-label="dragon"></i></li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="du-point-de-vue-dun-producteur-de-données" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>Du point de vue d’un producteur de données</h1>
+
+</section>
+<section id="parquet-quels-avantages" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2><code>Parquet</code>: quels avantages ?</h2>
+<ul>
+<li>Format libre, <em>open source</em> et <span class="orange"><strong>indépendant du langage</strong></span> ;
+<ul>
+<li>Les formats propriétaires imposent des outils aux consommateurs !</li>
+</ul></li>
+<li><strong><span class="orange">Plus de confort</span></strong> pour les utilisateurs:
+<ul>
+<li>Des <span class="blue2">requêtes plus rapides et efficaces</span>: seulement les données nécessaires sont lues</li>
+<li>Des <span class="blue2">données conformes</span> à la mise à disposition par le producteur</li>
+</ul></li>
 </ul>
 </section>
-<section id="le-format-parquet-3" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Le format <code>Parquet</code></h2>
+<section id="parquet-quels-usages" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2><code>Parquet</code>: quels usages ?</h2>
+<ul>
+<li>Format privilégié pour la mise à disposition de données internes à l’Insee:
+<ul>
+<li>Moins d’asymétries entre utilisateurs et producteurs.</li>
+</ul></li>
+</ul>
+<div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Premières diffusions à l’externe</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Bureaux de votes du <strong><span class="blue2"><strong>répertoire électoral unique</strong></span></strong> (REU):</li>
+<li><span class="blue2"><strong>Recensement de la population</strong></span> (RP)</li>
+<li><span class="blue2"><strong>Base permanente des équipements</strong></span> (BPE)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="parquet-quels-usages-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2><code>Parquet</code>: quels usages ?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../slides-data/images/res_secondaires.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../slides-data/images/res_secondaires2.png"></p>
+</div></div>
+<p><em>Exemples de cartes pouvant être produites simplement avec les données du recensement diffusées par l’Insee</em></p>
+</section></section>
+<section>
+<section id="exploiter-un-fichier-parquet" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>Exploiter un fichier <code>Parquet</code></h1>
+
+</section>
+<section id="enjeu" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Enjeu</h2>
+<ul>
+<li><code>Parquet</code> ne résout pas tout
+<ul>
+<li>L’espace disque est optimisé</li>
+<li>Les données décompressées doivent <strong><span class="blue2">passer en RAM</span></strong></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Le framework adapté dépend de la <span class="orange"><strong>volumétrie</strong></span>
+<ul>
+<li>Pour la plupart des besoins : <code>Arrow</code> et <code>DuckDB</code></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="les-frameworks" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Les frameworks</h2>
 <ul>
 <li>Deux <em>frameworks</em> de référence : <a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_arrow.html">Arrow</a> et <a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_duckdb.html">DuckDB</a>
 <ul>
 <li>Orientation <span class="blue2"><strong>fichier</strong></span> (<code>Arrow</code>) VS orientation <span class="blue2"><strong>BDD</strong></span> (<code>DuckDB</code>)</li>
-<li>Très bonne <span class="blue2"><strong>intégration</strong></span> avec le <code>tidyverse</code></li>
-</ul></li>
-<li><span class="orange"><strong>Traitement en-mémoire optimisé</strong></span>
-<ul>
-<li><span class="blue2"><strong>Orientés-colonne</strong></span></li>
-<li><span class="blue2"><strong><em>Lazy evaluation</em></strong></span></li>
 </ul></li>
 </ul>
 <div class="fragment">
+<ul>
+<li><span class="orange"><strong>Traitement en-mémoire optimisé</strong></span>
+<ul>
+<li><span class="blue2"><strong>Orientés-colonne</strong></span></li>
+<li><span class="blue2"><strong><em>Lazy evaluation</em></strong></span> (prochaine slide)</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Très bonne <span class="blue2"><strong>intégration</strong></span>:
+<ul>
+<li>Avec le <code>tidyverse</code> (<i class="fa-brands fa-r-project" aria-label="r-project"></i>)</li>
+<li>Avec le système de stockage <code>S3</code></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="les-frameworks-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Les frameworks</h2>
+
+<img data-src="https://linogaliana.github.io/parquet-recensement-tutomate-slides/img/librairies2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="la-lazy-evaluation" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>La lazy evaluation</h2>
+<ul>
+<li>Les frameworks comme <strong><span class="orange">Arrow</span></strong> ou <strong><span class="orange">DuckDB</span></strong> n’exécutent pas immédiatement les opérations</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Les instructions sont <strong><span class="orange">optimisées avant exécution</span></strong>
+<ul>
+<li>Vous écrivez un <strong><span class="blue2">plan d’exécution</span></strong>, réinterprété</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Avantages :
+<ul>
+<li><strong><span class="blue2">Moins de données</span></strong> manipulées inutilement</li>
+<li><strong><span class="blue2">Moins de RAM</span></strong> consommée</li>
+<li><strong><span class="blue2">Exécution plus rapide</span></strong> car optimisée</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="la-lazy-evaluation-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>La lazy evaluation</h2>
 <div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -449,19 +626,51 @@ Lino Galiana
 <p><strong>Exemple d’une requête <em>lazy</em></strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span>  <span class="co"># Récupère seulement les données nécessaires</span></span>
-<span id="cb1-3"><a></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span>  <span class="co"># Récupère seulement les colonnes nécessaires</span></span>
-<span id="cb1-4"><a></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a></a>  <span class="fu">collect</span>()  <span class="co"># Les calculs ne sont effectués qu'à cette étape !</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>En supposant qu’<code>achille</code> est un objet <code>Arrow</code> ou <code>DuckDB</code>:</p>
+<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a>  <span class="fu">collect</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Récupère seulement les données nécessaires</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="2">Récupère seulement les variables nécessaires</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="3">Les <strong><span class="orange">calculs ne sont effectués qu’à cette étape</span></strong> !</span>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="le-format-parquet-4" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<section id="la-lazy-evaluation-2" class="slide level2 nonincremental" data-background-image="background.svg" data-background-size="contain">
+<h2>La lazy evaluation</h2>
+<ul>
+<li>Voici le début du plan:</li>
+</ul>
+
+<img data-src="../slides-data/images/lazyeval1.png" class="r-stretch"><p>❓️ <span class="blueµ2"><em>Pourrait-il être optimisé ?</em></span></p>
+</section>
+<section id="la-lazy-evaluation-3" class="slide level2 nonincremental" data-background-image="background.svg" data-background-size="contain">
+<h2>La lazy evaluation</h2>
+<ul>
+<li>Voici le plan plus optimal:
+<ul>
+<li><span class="orange"><strong>Predicate pushdown</strong></span></li>
+</ul></li>
+</ul>
+
+<img data-src="../slides-data/images/lazyeval2.png" class="r-stretch"></section>
+<section id="le-format-parquet" class="slide level2 nonincremental" data-background-image="background.svg" data-background-size="contain">
 <h2>Le format <code>Parquet</code></h2>
 <ul>
 <li><code>Parquet</code> gagne sur tous les tableaux</li>
