@@ -234,7 +234,7 @@ Lino Galiana
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/vvv.png" height="350"></p>
+<p><img data-src="https://ensae-reproductibilite.github.io/slides/img/vvv.png" height="350"></p>
 <figcaption>Source : <a href="https://www.packtpub.com/product/artificial-intelligence-with-python-second-edition/9781839219535">AI with Python</a></figcaption>
 </figure>
 </div>
@@ -670,17 +670,63 @@ Lino Galiana
 </ul>
 
 <img data-src="../slides-data/images/lazyeval2.png" class="r-stretch"></section>
-<section id="le-format-parquet" class="slide level2 nonincremental" data-background-image="background.svg" data-background-size="contain">
-<h2>Le format <code>Parquet</code></h2>
-<ul>
-<li><code>Parquet</code> gagne sur tous les tableaux</li>
-</ul>
-<div class="fragment">
+<section id="parquet-gagne-sur-tous-les-tableaux" class="slide level2 nonincremental" data-background-image="background.svg" data-background-size="contain">
+<h2><code>Parquet</code> gagne sur tous les tableaux</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/tableau-perf-parquet.png" class="quarto-figure quarto-figure-center" height="500"></p>
+<p><img data-src="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/tableau-perf-parquet.png" height="500"></p>
+<figcaption><em>Benchmarks</em> faits pour la formation aux bonnes pratiques de l’Insee</figcaption>
 </figure>
 </div>
+</section>
+<section id="ressources-complémentaires" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Ressources complémentaires</h2>
+<ul>
+<li>Les posts d’Eric Mauvière sur <a href="https://www.icem7.fr/">icem7.fr/</a></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><a href="https://www.casd.eu/webinaire-casd-data-tech/">Webinaire du CASD</a> sur <code>Parquet</code> et <code>DuckDB</code></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><a href="https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/">La formation aux bonnes pratiques</a> de l’Insee</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Un atelier de l’EHESS sur <code>Parquet</code> avec de nombreux exemples <a href="https://linogaliana.github.io/parquet-recensement-tutomate/">ici</a></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Le <a href="https://ensae-reproductibilite.github.io/website/">cours de mise en production</a> de l’ENSAE</li>
+</ul>
+</div>
+</section>
+<section id="ce-nest-pas-fini" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Ce n’est pas fini !</h2>
+
+<img data-src="https://minio.lab.sspcloud.fr/lgaliana/generative-art/ssphub/tunes_chasing.jpg" class="r-stretch"></section>
+<section id="nouvelles-opportunités-avec-cet-écosystème" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Nouvelles opportunités avec cet écosystème</h2>
+<ul>
+<li><span class="orange"><strong>Intégration native avec <code>S3</code></strong></span>
+<ul>
+<li>Pour <span class="blue2"><strong>travailler sur des serveurs à l’état de l’art</strong></span>…</li>
+<li>Plutôt que sur des ordinateurs aux ressources limitées</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><a href="https://minio.lab.sspcloud.fr/lgaliana/generative-art/ssphub/tunes_chasing.jpg">DuckDB WASM</a> pour faire du <span class="orange"><strong><code>DuckDB</code> dans le navigateur</strong></span> :
+<ul>
+<li>Pour des <span class="blue2"><strong><em>dataviz</em> réactives</strong></span>…</li>
+<li>Dans des <span class="blue2"><strong>sites statiques</strong></span> !</li>
+<li>Bye bye les galères de déploiement de <code>Shiny</code>, <code>Streamlit</code>…</li>
+</ul></li>
+</ul>
 
 
 </div>

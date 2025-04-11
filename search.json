@@ -147,11 +147,32 @@
     "text": "La lazy evaluation\n\nVoici le plan plus optimal:\n\nPredicate pushdown"
   },
   {
-    "objectID": "slides-data/index.html#le-format-parquet",
-    "href": "slides-data/index.html#le-format-parquet",
+    "objectID": "slides-data/index.html#parquet-gagne-sur-tous-les-tableaux",
+    "href": "slides-data/index.html#parquet-gagne-sur-tous-les-tableaux",
     "title": "Le format de données Parquet",
-    "section": "Le format Parquet",
-    "text": "Le format Parquet\n\nParquet gagne sur tous les tableaux"
+    "section": "Parquet gagne sur tous les tableaux",
+    "text": "Parquet gagne sur tous les tableaux\n\n\n\nBenchmarks faits pour la formation aux bonnes pratiques de l’Insee"
+  },
+  {
+    "objectID": "slides-data/index.html#ressources-complémentaires",
+    "href": "slides-data/index.html#ressources-complémentaires",
+    "title": "Le format de données Parquet",
+    "section": "Ressources complémentaires",
+    "text": "Ressources complémentaires\n\nLes posts d’Eric Mauvière sur icem7.fr/\n\n\n\nWebinaire du CASD sur Parquet et DuckDB\n\n\n\n\nLa formation aux bonnes pratiques de l’Insee\n\n\n\n\nUn atelier de l’EHESS sur Parquet avec de nombreux exemples ici\n\n\n\n\nLe cours de mise en production de l’ENSAE"
+  },
+  {
+    "objectID": "slides-data/index.html#ce-nest-pas-fini",
+    "href": "slides-data/index.html#ce-nest-pas-fini",
+    "title": "Le format de données Parquet",
+    "section": "Ce n’est pas fini !",
+    "text": "Ce n’est pas fini !"
+  },
+  {
+    "objectID": "slides-data/index.html#nouvelles-opportunités-avec-cet-écosystème",
+    "href": "slides-data/index.html#nouvelles-opportunités-avec-cet-écosystème",
+    "title": "Le format de données Parquet",
+    "section": "Nouvelles opportunités avec cet écosystème",
+    "text": "Nouvelles opportunités avec cet écosystème\n\nIntégration native avec S3\n\nPour travailler sur des serveurs à l’état de l’art…\nPlutôt que sur des ordinateurs aux ressources limitées\n\n\n\n\nDuckDB WASM pour faire du DuckDB dans le navigateur :\n\nPour des dataviz réactives…\nDans des sites statiques !\nBye bye les galères de déploiement de Shiny, Streamlit…"
   },
   {
     "objectID": "slides-data/api.html#quest-ce-quune-api",
