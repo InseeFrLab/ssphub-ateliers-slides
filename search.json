@@ -161,6 +161,13 @@
     "text": "Ressources complémentaires\n\nLes posts d’Eric Mauvière sur icem7.fr/\n\n\n\nWebinaire du CASD sur Parquet et DuckDB\n\n\n\n\nLa formation aux bonnes pratiques de l’Insee\n\n\n\n\nUn atelier de l’EHESS sur Parquet avec de nombreux exemples ici\n\n\n\n\nLe cours de mise en production de l’ENSAE"
   },
   {
+    "objectID": "slides-data/index.html#applications",
+    "href": "slides-data/index.html#applications",
+    "title": "Le format de données Parquet",
+    "section": "Applications",
+    "text": "Applications"
+  },
+  {
     "objectID": "slides-data/index.html#ce-nest-pas-fini",
     "href": "slides-data/index.html#ce-nest-pas-fini",
     "title": "Le format de données Parquet",
@@ -172,7 +179,28 @@
     "href": "slides-data/index.html#nouvelles-opportunités-avec-cet-écosystème",
     "title": "Le format de données Parquet",
     "section": "Nouvelles opportunités avec cet écosystème",
-    "text": "Nouvelles opportunités avec cet écosystème\n\nIntégration native avec S3\n\nPour travailler sur des serveurs à l’état de l’art…\nPlutôt que sur des ordinateurs aux ressources limitées\n\n\n\n\nDuckDB WASM pour faire du DuckDB dans le navigateur :\n\nPour des dataviz réactives…\nDans des sites statiques !\nBye bye les galères de déploiement de Shiny, Streamlit…"
+    "text": "Nouvelles opportunités avec cet écosystème\n\nIntégration native avec S3\n\nPour travailler sur des serveurs à l’état de l’art…\nPlutôt que sur des ordinateurs aux ressources limitées\n\n\n\n\nDuckDB WASM pour faire du DuckDB dans le navigateur :\n\nPour des dataviz réactives… dans des sites statiques !\nBye bye les galères de déploiement de Shiny, Streamlit…"
+  },
+  {
+    "objectID": "slides-data/index.html#les-extensions-spatiales",
+    "href": "slides-data/index.html#les-extensions-spatiales",
+    "title": "Le format de données Parquet",
+    "section": "Les extensions spatiales",
+    "text": "Les extensions spatiales\n\nPossibilité de lire/écrire des objets géographiques dans Parquet\n\nCompatible avec les standards GeoParquet\nExtension SPATIAL\n\n\n\n\nPermet des traitements géographiques efficaces :\n\nJointures spatiales, calculs de distance…\nRécupère le résultat sous sf"
+  },
+  {
+    "objectID": "slides-data/index.html#travailler-avec-s3",
+    "href": "slides-data/index.html#travailler-avec-s3",
+    "title": "Le format de données Parquet",
+    "section": "Travailler avec S3",
+    "text": "Travailler avec S3\n\nBeaucoup plus simple qu’un data warehouse et des VM postgre\n\n\n\nOn peut lire la donnée sur S3 presque comme si elle était en local\n\nFROM 's3://bucket_name/filename.extension';\nSELECT *\nWHERE DEPT=='36'"
+  },
+  {
+    "objectID": "slides-data/index.html#duckdb-dans-le-navigateur",
+    "href": "slides-data/index.html#duckdb-dans-le-navigateur",
+    "title": "Le format de données Parquet",
+    "section": "DuckDB dans le navigateur",
+    "text": "DuckDB dans le navigateur\n\nGrâce à DuckDB-WASM, on peut exécuter du SQL dans le navigateur 🎯\n\nEmbarqué par défaut sur Observablehq et Quarto\n\n\n\n\nIdéal pour des applications interactives :\n\nVisualisations réactives\nExploration de fichiers Parquet sans serveur\n\n\n\n\n\n⚡ Pas besoin de serveur, tout est côté client !\n\n\n\n\n\n\n\nExemples inspirants\n\n\n\nExplorateur de données 100 % statique sur SSPCloud\nVisualisation locale sans partage de données sensibles"
   },
   {
     "objectID": "slides-data/api.html#quest-ce-quune-api",

@@ -627,24 +627,24 @@ Lino Galiana
 </div>
 <div class="callout-content">
 <p>En supposant qu’<code>achille</code> est un objet <code>Arrow</code> ou <code>DuckDB</code>:</p>
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a>  <span class="fu">collect</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2"></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6"></a>  <span class="fu">collect</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Récupère seulement les données nécessaires</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Récupère seulement les données nécessaires</span>
 </dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="2">Récupère seulement les variables nécessaires</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Récupère seulement les variables nécessaires</span>
 </dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="3">Les <strong><span class="orange">calculs ne sont effectués qu’à cette étape</span></strong> !</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="3">Les <strong><span class="orange">calculs ne sont effectués qu’à cette étape</span></strong> !</span>
 </dd>
 </dl>
 </div>
@@ -705,6 +705,10 @@ Lino Galiana
 </ul>
 </div>
 </section>
+<section id="applications" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Applications</h2>
+
+<img data-src="../slides-data/images/comparatifs_exo.png" class="r-stretch"></section>
 <section id="ce-nest-pas-fini" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Ce n’est pas fini !</h2>
 
@@ -722,11 +726,87 @@ Lino Galiana
 <ul>
 <li><a href="https://minio.lab.sspcloud.fr/lgaliana/generative-art/ssphub/tunes_chasing.jpg">DuckDB WASM</a> pour faire du <span class="orange"><strong><code>DuckDB</code> dans le navigateur</strong></span> :
 <ul>
-<li>Pour des <span class="blue2"><strong><em>dataviz</em> réactives</strong></span>…</li>
-<li>Dans des <span class="blue2"><strong>sites statiques</strong></span> !</li>
+<li>Pour des <span class="blue2"><strong><em>dataviz</em> réactives</strong></span>… dans des <span class="blue2"><strong>sites statiques</strong></span> !</li>
 <li>Bye bye les galères de déploiement de <code>Shiny</code>, <code>Streamlit</code>…</li>
 </ul></li>
 </ul>
+</div>
+</section></section>
+<section>
+<section id="fonctionnalités-plus-avancées" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>Fonctionnalités plus avancées</h1>
+
+</section>
+<section id="les-extensions-spatiales" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Les extensions spatiales</h2>
+<ul>
+<li>Possibilité de lire/écrire des <span class="orange"><strong>objets géographiques</strong></span> dans <code>Parquet</code>
+<ul>
+<li>Compatible avec les standards <code>GeoParquet</code></li>
+<li>Extension <code>SPATIAL</code></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Permet des traitements <span class="blue2"><strong>géographiques efficaces</strong></span> :
+<ul>
+<li>Jointures spatiales, calculs de distance…</li>
+<li>Récupère le résultat sous <code>sf</code></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="travailler-avec-s3" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Travailler avec <code>S3</code></h2>
+<ul>
+<li>Beaucoup plus simple qu’un <em>data warehouse</em> et des VM <code>postgre</code></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>On peut lire la donnée sur <code>S3</code> <em>presque comme si</em> elle était en local</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>FROM <span class="st">'s3://bucket_name/filename.extension'</span><span class="op">;</span></span>
+<span id="cb1-2"><a></a>SELECT <span class="op">*</span></span>
+<span id="cb1-3"><a></a>WHERE DEPT<span class="op">==</span><span class="st">'36'</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="duckdb-dans-le-navigateur" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2><code>DuckDB</code> dans le navigateur</h2>
+<ul>
+<li>Grâce à <code>DuckDB-WASM</code>, on peut exécuter du SQL <span class="orange"><strong>dans le navigateur</strong></span> 🎯
+<ul>
+<li>Embarqué par défaut sur <a href="https://observablehq.com/"><code>Observablehq</code></a> et <a href="https://quarto.org/docs/interactive/ojs/"><code>Quarto</code></a></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Idéal pour des <span class="blue2"><strong>applications interactives</strong></span> :
+<ul>
+<li>Visualisations réactives</li>
+<li>Exploration de fichiers <code>Parquet</code> sans serveur</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>⚡ <strong>Pas besoin de serveur</strong>, tout est côté client !</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exemples inspirants</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Explorateur de données <span class="blue2"><strong>100 % statique</strong></span> sur <code>SSPCloud</code></li>
+<li>Visualisation locale sans partage de données sensibles</li>
+</ul>
+</div>
+</div>
+</div>
 
 
 </div>
