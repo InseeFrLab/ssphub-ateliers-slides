@@ -207,6 +207,132 @@
     "href": "slides-data/index.html#exemple",
     "title": "Le format de données Parquet",
     "section": "Exemple",
-    "text": "Exemple\n\ncontainer\n\n\n\n\n\n\n\nimport {container, } from \"@linogaliana/atelier-parquet-ssphub\""
+    "text": "Exemple\n\nhtml`\n  &lt;div style=\"display: flex; flex-direction: column; gap: 1rem;\"&gt;\n\n    &lt;!-- Search bar at the top --&gt;\n    &lt;div&gt;${viewof search}&lt;/div&gt;\n\n    &lt;!-- Two-column block --&gt;\n    &lt;div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; backgroundColor: '#293845';\"&gt;\n      &lt;div&gt;${produce_histo(dvf)}&lt;/div&gt;\n      &lt;div&gt;${viewof table_dvf}&lt;/div&gt;\n    &lt;/div&gt;\n\n\n  &lt;/div&gt;\n`\n\n\n\n\n\n\n\nviewof search = Inputs.select(cog, {format: x =&gt; x.LIBELLE, value: cog.find(t =&gt; t.LIBELLE == \"Grasse\")})\n\ncog = db.query(`SELECT * FROM read_csv_auto(\"https://minio.lab.sspcloud.fr/lgaliana/data/python-ENSAE/cog_2023.csv\") WHERE DEP == '06'`)\ndvf = db.query(query)\n\ndb = DuckDBClient.of({})\n\nquery = `\n  FROM read_parquet('https://minio.lab.sspcloud.fr/projet-formation/nouvelles-sources/data/geoparquet/dvf.parquet')\n  SELECT\n    CAST(date_mutation AS date) AS date,\n    valeur_fonciere, code_commune,\n    longitude, latitude, valeur_fonciere AS valeur_fonciere_bar\n  WHERE code_commune = '${search.COM}'\n`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof table_dvf = Inputs.table(dvf, {columns: [\"date\", \"valeur_fonciere\"], rows: 15})\n\nproduce_histo = function(dvf){\n  const histo = Plot.plot({\n  style: {backgroundColor: \"transparent\"},\n  marks: [\n    Plot.rectY(dvf, Plot.binX({y: \"count\"}, {x: \"valeur_fonciere\", fill: \"#ff562c\"})),\n    Plot.ruleY([0])\n  ]\n})\n  return histo\n}"
+  },
+  {
+    "objectID": "slides-data/index.html#des-questions",
+    "href": "slides-data/index.html#des-questions",
+    "title": "Le format de données Parquet",
+    "section": "Des questions ?",
+    "text": "Des questions ?"
+  },
+  {
+    "objectID": "slides-data/api.html#quest-ce-quune-api",
+    "href": "slides-data/api.html#quest-ce-quune-api",
+    "title": "Les API",
+    "section": "Qu’est-ce qu’une API ?",
+    "text": "Qu’est-ce qu’une API ?\n\n\n\nUne Application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.\nCNIL\n\n\n\nDéfinition peu informative:\n\nPython, scikit-learn, Docker, etc. sont des APIs\nEn pratique, on signifie généralement une API REST"
+  },
+  {
+    "objectID": "slides-data/api.html#les-apis-rest",
+    "href": "slides-data/api.html#les-apis-rest",
+    "title": "Les API",
+    "section": "Les APIs REST",
+    "text": "Les APIs REST\n\n\nAPI RESTful : API conforme au style d’architecture REST\n\nCommunication via le protocole HTTP\n\n\n\n\nEn pratique :\n\nOn accède à un endpoint (ex : l’API de la BAN)\nAvec des requêtes HTTP (GET, POST, etc.) (ex : rues contenant “comédie”)"
+  },
+  {
+    "objectID": "slides-data/api.html#analogie-avec-un-restaurant",
+    "href": "slides-data/api.html#analogie-avec-un-restaurant",
+    "title": "Les API",
+    "section": "Analogie avec un restaurant",
+    "text": "Analogie avec un restaurant\n\n\n💬 Vous passez commande\n\nRequête avec paramètres depuis , , votre navigateur…\n\n\n\n\n↔︎️ Le serveur transmet la commande en cuisine:\n\nPoint d’entrée de l’API\n\n\n\n\n\n🧑‍🍳 La cuisine prépare le plat\n\nLe serveur (informatique) fait les traitements ad hoc\n\n\n\n\n\n🍕 Vous recevez votre plat\n\nVous recevez une réponse au format JSON"
+  },
+  {
+    "objectID": "slides-data/api.html#pourquoi-les-api",
+    "href": "slides-data/api.html#pourquoi-les-api",
+    "title": "Les API",
+    "section": "Pourquoi les API ?",
+    "text": "Pourquoi les API ?\n\nPraticité car permet de dissocier:\n\nLe client: une interface web () ou un langage informatique (, , …)\nLe serveur: le moteur de calcul derrière\n\n\n\n\nSobriété: permet l’accès à la donnée voulue sans parcourir tout un fichier\n\n\n\n\nConfidentialité: on peut mettre des droits d’accès à certaines données\n\n\n\n\nUnversalité: pas d’a priori sur le mode d’accès"
+  },
+  {
+    "objectID": "slides-data/api.html#les-api-de-données",
+    "href": "slides-data/api.html#les-api-de-données",
+    "title": "Les API",
+    "section": "Les API de données",
+    "text": "Les API de données"
+  },
+  {
+    "objectID": "slides-data/api.html#les-api-de-données-1",
+    "href": "slides-data/api.html#les-api-de-données-1",
+    "title": "Les API",
+    "section": "Les API de données",
+    "text": "Les API de données\n\nPlus de fichiers enregistrés manuellement\n\nMise à jour assurée par le producteur\nDirectement propagées au consommateur de données\nPermet l’automatisation de scripts sans stockage local\n\n\n\n\nContrat formel avec un producteur de données\n\nContrairement au webscraping!\n\n\n\n\n\nPermet de récupérer des données transformées complexes\n\nExemple: inférences de modèles 🤖"
+  },
+  {
+    "objectID": "slides-data/api.html#structuration-dune-requête",
+    "href": "slides-data/api.html#structuration-dune-requête",
+    "title": "Les API",
+    "section": "Structuration d’une requête",
+    "text": "Structuration d’une requête\nLes requêtes prennent la forme d’URI:\n\n\\[\n\\quad \\underbrace{\\text{https://api-adresse.data.gouv.fr}}_{\\text{API root}}/\\underbrace{\\text{search}}_{\\text{API endpoint}}\n\\]\n\\[\n\\quad /?\\underbrace{\\text{q=88+avenue+verdier}}_{\\text{main parameter}}\\&\\underbrace{\\text{postcode=92120}}_{\\text{additional parameter}}\n\\]\n\nAuxquelles vont s’ajouter des headers (explication à venir)\n\n\n\n\n\n\nNote\n\n\nDémonstration interactive"
+  },
+  {
+    "objectID": "slides-data/api.html#les-requêtes-http",
+    "href": "slides-data/api.html#les-requêtes-http",
+    "title": "Les API",
+    "section": "Les requêtes HTTP",
+    "text": "Les requêtes HTTP\n\nGET: récupérer des données depuis un serveur web (lecture d’une base de données…)\nPOST: envoyer des données au serveur (formulaires de mise à jour de données, etc.)\nPython communique avec internet via le package requests (requests.get et requests.post)"
+  },
+  {
+    "objectID": "slides-data/api.html#les-codes-http",
+    "href": "slides-data/api.html#les-codes-http",
+    "title": "Les API",
+    "section": "Les codes HTTP",
+    "text": "Les codes HTTP\n\nSignification des codes HTTP\n\n1xx : Informations\n2xx : Succès\n3xx : Redirections\n4xx : Erreurs côté client\n5xx : Erreurs côté serveur\n\n\n\n\n\n\n\n\nCodes à retenir\n\n\nCeux à retenir sont : 200 (succès), 400 (requête mal structurée), 401 (authentification nonréussie), 403 (accès interdit), 404 (ressource demandée n’existe pas), 503 (le serveur n’est pas en capacité de répondre)"
+  },
+  {
+    "objectID": "slides-data/api.html#les-swaggers",
+    "href": "slides-data/api.html#les-swaggers",
+    "title": "Les API",
+    "section": "Les swaggers",
+    "text": "Les swaggers\n\n\n\nFormat standardisé de documentation\n\nGénéralement ${URL_ROOT}/docs\n\nUtilisation interactive:\n\nGénère des exemples curl (ligne de commande)"
+  },
+  {
+    "objectID": "slides-data/api.html#comment-connaître-les-paramètres-dune-api",
+    "href": "slides-data/api.html#comment-connaître-les-paramètres-dune-api",
+    "title": "Les API",
+    "section": "Comment connaître les paramètres d’une API ?",
+    "text": "Comment connaître les paramètres d’une API ?\n\nSwagger \n\n\n\nOutils développement navigateur (CTRL+MAJ+K sur ):\n\nOnglet réseau \n\n\n\n\n\nPostman \n\n\n\n\nExtension  REST Client"
+  },
+  {
+    "objectID": "slides-data/api.html#les-requêtes-get",
+    "href": "slides-data/api.html#les-requêtes-get",
+    "title": "Les API",
+    "section": "Les requêtes GET",
+    "text": "Les requêtes GET\n\n\n\nRequête la plus commune\n\n\n\nTransformation en objet  (JSON -&gt; dict) est naturelle\n\n\n\n\nFormattage dépend de chaque API (lire la doc ! 👮)\n\n\n\n\nRetravailler l’output peut être lourd\n\nimport requests\nadresse = \"88 avenue verdier\"\nurl_ban_example = (\n    f\"https://api-adresse.data.gouv.fr/search/\"\n    f\"?q={adresse.replace(\" \", \"+\")}&postcode=92120\"\n)\nrequests.get(url_ban_example).json()"
+  },
+  {
+    "objectID": "slides-data/api.html#les-requêtes-post",
+    "href": "slides-data/api.html#les-requêtes-post",
+    "title": "Les API",
+    "section": "Les requêtes POST",
+    "text": "Les requêtes POST\n\n\n\nEnvoyer des données utiles à l’API\nPlus complexe mais Requests est flexible\n\nTransformer les objets  en input de l’API\n\n\nparams = {\n    \"columns\": [\"adresse\", \"Nom_commune\"],\n    \"citycode\": \"DEPCOM\",\n    \"result_columns\": [\"result_score\", \"latitude\", \"longitude\"],\n}\n\nresponse = requests.post(\n        \"https://api-adresse.data.gouv.fr/search/csv/\",\n        data=params,\n        files={\"data\": open(csv_file, \"rb\")},\n    )"
+  },
+  {
+    "objectID": "slides-data/api.html#bonnes-pratiques",
+    "href": "slides-data/api.html#bonnes-pratiques",
+    "title": "Les API",
+    "section": "Bonnes pratiques",
+    "text": "Bonnes pratiques\nLa doctrine générale\n\nSource: Cours de l’ENSAE de mise en production"
+  },
+  {
+    "objectID": "slides-data/api.html#bonnes-pratiques-pour-les-secrets",
+    "href": "slides-data/api.html#bonnes-pratiques-pour-les-secrets",
+    "title": "Les API",
+    "section": "Bonnes pratiques pour les secrets",
+    "text": "Bonnes pratiques pour les secrets\n\n\n\nBoite de dialogue via getpass (application interactive uniquement)\n\n\n\nVariables d’environnement:\n\nDans un fichier .env (non committé!) lu avec dotenv\nDans les secrets de l’intégration continue (cf. doc )\n\n\nfrom dotenv import load_dotenv\nload_dotenv()\ntoken = os.getenv(\"MON_PETIT_JETON\")"
+  },
+  {
+    "objectID": "slides-data/api.html#conclusion",
+    "href": "slides-data/api.html#conclusion",
+    "title": "Les API",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nPratique pour récupérer des données ponctuelles:\n\nAfficher un nombre limité d’enregistrements dans une application\nRécupérer des données issues d’un processus de transformation complexe\n\n\n\n\nLimitées en termes de volumétrie ou stabilité d’accès\n\n\n\n\nCode très adhérant à une API et un langage client"
+  },
+  {
+    "objectID": "slides-data/api.html#des-questions",
+    "href": "slides-data/api.html#des-questions",
+    "title": "Les API",
+    "section": "Des questions ?",
+    "text": "Des questions ?"
   }
 ]

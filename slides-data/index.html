@@ -629,24 +629,24 @@ Lino Galiana
 </div>
 <div class="callout-content">
 <p>En supposant qu’<code>achille</code> est un objet <code>Arrow</code> ou <code>DuckDB</code>:</p>
-<div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-6" class="code-annotation-target"><a href="#annotated-cell-4-6"></a>  <span class="fu">collect</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>n_logements_depcom <span class="ot">&lt;-</span> achille <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2"></a>  <span class="fu">filter</span>(dep <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>)) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>  <span class="fu">select</span>(idlogement, depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>  <span class="fu">group_by</span>(depcom) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a>  <span class="fu">summarise</span>(<span class="at">n_logements =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6"></a>  <span class="fu">collect</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">Récupère seulement les données nécessaires</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Récupère seulement les données nécessaires</span>
 </dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">Récupère seulement les variables nécessaires</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="2">Récupère seulement les variables nécessaires</span>
 </dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="6" data-code-annotation="3">Les <strong><span class="orange">calculs ne sont effectués qu’à cette étape</span></strong> !</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="3">Les <strong><span class="orange">calculs ne sont effectués qu’à cette étape</span></strong> !</span>
 </dd>
 </dl>
 </div>
@@ -793,7 +793,21 @@ Lino Galiana
 <section id="exemple" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Exemple</h2>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="425" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 424;"><span id="cb2-425"><a></a>container</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="427" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 426;"><span id="cb2-427"><a></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb2-428"><a></a><span class="vs">  &lt;div style="display: flex; flex-direction: column; gap: 1rem;"&gt;</span></span>
+<span id="cb2-429"><a></a></span>
+<span id="cb2-430"><a></a><span class="vs">    &lt;!-- Search bar at the top --&gt;</span></span>
+<span id="cb2-431"><a></a><span class="vs">    &lt;div&gt;</span><span class="sc">${</span>viewof search<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb2-432"><a></a></span>
+<span id="cb2-433"><a></a><span class="vs">    &lt;!-- Two-column block --&gt;</span></span>
+<span id="cb2-434"><a></a><span class="vs">    &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; backgroundColor: '#293845';"&gt;</span></span>
+<span id="cb2-435"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span><span class="fu">produce_histo</span>(dvf)<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb2-436"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>viewof table_dvf<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb2-437"><a></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb2-438"><a></a></span>
+<span id="cb2-439"><a></a></span>
+<span id="cb2-440"><a></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb2-441"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="expression">
 
@@ -801,16 +815,92 @@ Lino Galiana
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="429" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 428;"><span id="cb3-429"><a></a><span class="im">import</span> {container<span class="op">,</span> } <span class="im">from</span> <span class="st">"@linogaliana/atelier-parquet-ssphub"</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="450" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 449;"><span id="cb3-450"><a></a>viewof search <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(cog<span class="op">,</span> {<span class="dt">format</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">.</span><span class="at">LIBELLE</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> cog<span class="op">.</span><span class="fu">find</span>(t <span class="kw">=&gt;</span> t<span class="op">.</span><span class="at">LIBELLE</span> <span class="op">==</span> <span class="st">"Grasse"</span>)})</span>
+<span id="cb3-451"><a></a></span>
+<span id="cb3-452"><a></a>cog <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(<span class="vs">`SELECT * FROM read_csv_auto("https://minio.lab.sspcloud.fr/lgaliana/data/python-ENSAE/cog_2023.csv") WHERE DEP == '06'`</span>)</span>
+<span id="cb3-453"><a></a>dvf <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(query)</span>
+<span id="cb3-454"><a></a></span>
+<span id="cb3-455"><a></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span>
+<span id="cb3-456"><a></a></span>
+<span id="cb3-457"><a></a>query <span class="op">=</span> <span class="vs">`</span></span>
+<span id="cb3-458"><a></a><span class="vs">  FROM read_parquet('https://minio.lab.sspcloud.fr/projet-formation/nouvelles-sources/data/geoparquet/dvf.parquet')</span></span>
+<span id="cb3-459"><a></a><span class="vs">  SELECT</span></span>
+<span id="cb3-460"><a></a><span class="vs">    CAST(date_mutation AS date) AS date,</span></span>
+<span id="cb3-461"><a></a><span class="vs">    valeur_fonciere, code_commune,</span></span>
+<span id="cb3-462"><a></a><span class="vs">    longitude, latitude, valeur_fonciere AS valeur_fonciere_bar</span></span>
+<span id="cb3-463"><a></a><span class="vs">  WHERE code_commune = '</span><span class="sc">${</span>search<span class="op">.</span><span class="at">COM</span><span class="sc">}</span><span class="vs">'</span></span>
+<span id="cb3-464"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-2" data-nodetype="declaration">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="0" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line -1;"><span id="cb4-0"><a></a>viewof table_dvf <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">table</span>(dvf<span class="op">,</span> {<span class="dt">columns</span><span class="op">:</span> [<span class="st">"date"</span><span class="op">,</span> <span class="st">"valeur_fonciere"</span>]<span class="op">,</span> <span class="dt">rows</span><span class="op">:</span> <span class="dv">15</span>})</span>
+<span id="cb4-1"><a></a></span>
+<span id="cb4-2"><a></a>produce_histo <span class="op">=</span> <span class="kw">function</span>(dvf){</span>
+<span id="cb4-3"><a></a>  <span class="kw">const</span> histo <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-4"><a></a>  <span class="dt">style</span><span class="op">:</span> {<span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"transparent"</span>}<span class="op">,</span></span>
+<span id="cb4-5"><a></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-6"><a></a>    Plot<span class="op">.</span><span class="fu">rectY</span>(dvf<span class="op">,</span> Plot<span class="op">.</span><span class="fu">binX</span>({<span class="dt">y</span><span class="op">:</span> <span class="st">"count"</span>}<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"valeur_fonciere"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#ff562c"</span>}))<span class="op">,</span></span>
+<span id="cb4-7"><a></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
+<span id="cb4-8"><a></a>  ]</span>
+<span id="cb4-9"><a></a>})</span>
+<span id="cb4-10"><a></a>  <span class="cf">return</span> histo</span>
+<span id="cb4-11"><a></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="des-questions" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Des questions ?</h2>
 
 
-</section></section>
+
+<img data-src="https://minio.lab.sspcloud.fr/lgaliana/generative-art/pythonds/kid.png" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -1029,7 +1119,7 @@ Lino Galiana
       });
     </script>
     <script type="ojs-module-contents">
-    eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImNvbnRhaW5lclxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaW1wb3J0IHtjb250YWluZXIsIH0gZnJvbSBcIkBsaW5vZ2FsaWFuYS9hdGVsaWVyLXBhcnF1ZXQtc3NwaHViXCIgXG4ifV19
+    eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Imh0bWxgXG4gIDxkaXYgc3R5bGU9XCJkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBnYXA6IDFyZW07XCI+XG5cbiAgICA8IS0tIFNlYXJjaCBiYXIgYXQgdGhlIHRvcCAtLT5cbiAgICA8ZGl2PiR7dmlld29mIHNlYXJjaH08L2Rpdj5cblxuICAgIDwhLS0gVHdvLWNvbHVtbiBibG9jayAtLT5cbiAgICA8ZGl2IHN0eWxlPVwiZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnIgMWZyOyBnYXA6IDFyZW07IGJhY2tncm91bmRDb2xvcjogJyMyOTM4NDUnO1wiPlxuICAgICAgPGRpdj4ke3Byb2R1Y2VfaGlzdG8oZHZmKX08L2Rpdj5cbiAgICAgIDxkaXY+JHt2aWV3b2YgdGFibGVfZHZmfTwvZGl2PlxuICAgIDwvZGl2PlxuXG5cbiAgPC9kaXY+XG5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2Ygc2VhcmNoID0gSW5wdXRzLnNlbGVjdChjb2csIHtmb3JtYXQ6IHggPT4geC5MSUJFTExFLCB2YWx1ZTogY29nLmZpbmQodCA9PiB0LkxJQkVMTEUgPT0gXCJHcmFzc2VcIil9KVxuXG5jb2cgPSBkYi5xdWVyeShgU0VMRUNUICogRlJPTSByZWFkX2Nzdl9hdXRvKFwiaHR0cHM6Ly9taW5pby5sYWIuc3NwY2xvdWQuZnIvbGdhbGlhbmEvZGF0YS9weXRob24tRU5TQUUvY29nXzIwMjMuY3N2XCIpIFdIRVJFIERFUCA9PSAnMDYnYClcbmR2ZiA9IGRiLnF1ZXJ5KHF1ZXJ5KVxuXG5kYiA9IER1Y2tEQkNsaWVudC5vZih7fSlcblxucXVlcnkgPSBgXG4gIEZST00gcmVhZF9wYXJxdWV0KCdodHRwczovL21pbmlvLmxhYi5zc3BjbG91ZC5mci9wcm9qZXQtZm9ybWF0aW9uL25vdXZlbGxlcy1zb3VyY2VzL2RhdGEvZ2VvcGFycXVldC9kdmYucGFycXVldCcpXG4gIFNFTEVDVFxuICAgIENBU1QoZGF0ZV9tdXRhdGlvbiBBUyBkYXRlKSBBUyBkYXRlLFxuICAgIHZhbGV1cl9mb25jaWVyZSwgY29kZV9jb21tdW5lLFxuICAgIGxvbmdpdHVkZSwgbGF0aXR1ZGUsIHZhbGV1cl9mb25jaWVyZSBBUyB2YWxldXJfZm9uY2llcmVfYmFyXG4gIFdIRVJFIGNvZGVfY29tbXVuZSA9ICcke3NlYXJjaC5DT019J1xuYFxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgdGFibGVfZHZmID0gSW5wdXRzLnRhYmxlKGR2Ziwge2NvbHVtbnM6IFtcImRhdGVcIiwgXCJ2YWxldXJfZm9uY2llcmVcIl0sIHJvd3M6IDE1fSlcblxucHJvZHVjZV9oaXN0byA9IGZ1bmN0aW9uKGR2Zil7XG4gIGNvbnN0IGhpc3RvID0gUGxvdC5wbG90KHtcbiAgc3R5bGU6IHtiYWNrZ3JvdW5kQ29sb3I6IFwidHJhbnNwYXJlbnRcIn0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5yZWN0WShkdmYsIFBsb3QuYmluWCh7eTogXCJjb3VudFwifSwge3g6IFwidmFsZXVyX2ZvbmNpZXJlXCIsIGZpbGw6IFwiI2ZmNTYyY1wifSkpLFxuICAgIFBsb3QucnVsZVkoWzBdKVxuICBdXG59KVxuICByZXR1cm4gaGlzdG9cbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2VhcmNoJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3RhYmxlX2R2ZicpIn1dfQ==
     </script>
     <script type="module">
     if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
