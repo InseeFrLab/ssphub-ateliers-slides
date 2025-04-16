@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://InseeFrLab.github.io/ssphub-ateliers-slides/slides-data/index.html</loc>
-    <lastmod>2025-04-16T15:16:53.311Z</lastmod>
+    <loc>https://InseeFrLab.github.io/ssphub-ateliers-slides/slides-data/parquet.html</loc>
+    <lastmod>2025-04-16T16:18:59.130Z</lastmod>
   </url>
   <url>
     <loc>https://InseeFrLab.github.io/ssphub-ateliers-slides/index.html</loc>
-    <lastmod>2025-04-16T15:16:53.306Z</lastmod>
+    <lastmod>2025-04-16T16:18:59.125Z</lastmod>
   </url>
   <url>
     <loc>https://InseeFrLab.github.io/ssphub-ateliers-slides/slides-data/api.html</loc>
-    <lastmod>2025-04-16T15:16:53.306Z</lastmod>
+    <lastmod>2025-04-16T16:18:59.126Z</lastmod>
   </url>
 </urlset>

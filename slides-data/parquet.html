@@ -793,21 +793,21 @@ Lino Galiana
 <section id="exemple" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Exemple</h2>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="427" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 426;"><span id="cb2-427"><a></a><span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb2-428"><a></a><span class="vs">  &lt;div style="display: flex; flex-direction: column; gap: 1rem;"&gt;</span></span>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="424" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 423;"><span id="cb2-424"><a></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb2-425"><a></a><span class="vs">  &lt;div style="display: flex; flex-direction: column; gap: 1rem;"&gt;</span></span>
+<span id="cb2-426"><a></a></span>
+<span id="cb2-427"><a></a><span class="vs">    &lt;!-- Search bar at the top --&gt;</span></span>
+<span id="cb2-428"><a></a><span class="vs">    &lt;div&gt;</span><span class="sc">${</span>viewof search<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
 <span id="cb2-429"><a></a></span>
-<span id="cb2-430"><a></a><span class="vs">    &lt;!-- Search bar at the top --&gt;</span></span>
-<span id="cb2-431"><a></a><span class="vs">    &lt;div&gt;</span><span class="sc">${</span>viewof search<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb2-432"><a></a></span>
-<span id="cb2-433"><a></a><span class="vs">    &lt;!-- Two-column block --&gt;</span></span>
-<span id="cb2-434"><a></a><span class="vs">    &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; backgroundColor: '#293845';"&gt;</span></span>
-<span id="cb2-435"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span><span class="fu">produce_histo</span>(dvf)<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb2-436"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>viewof table_dvf<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb2-437"><a></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb2-438"><a></a></span>
-<span id="cb2-439"><a></a></span>
-<span id="cb2-440"><a></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb2-441"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-430"><a></a><span class="vs">    &lt;!-- Two-column block --&gt;</span></span>
+<span id="cb2-431"><a></a><span class="vs">    &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; backgroundColor: '#293845';"&gt;</span></span>
+<span id="cb2-432"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span><span class="fu">produce_histo</span>(dvf)<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb2-433"><a></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>viewof table_dvf<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb2-434"><a></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb2-435"><a></a></span>
+<span id="cb2-436"><a></a></span>
+<span id="cb2-437"><a></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb2-438"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="expression">
 
@@ -815,21 +815,21 @@ Lino Galiana
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="450" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 449;"><span id="cb3-450"><a></a>viewof search <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(cog<span class="op">,</span> {<span class="dt">format</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">.</span><span class="at">LIBELLE</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> cog<span class="op">.</span><span class="fu">find</span>(t <span class="kw">=&gt;</span> t<span class="op">.</span><span class="at">LIBELLE</span> <span class="op">==</span> <span class="st">"Grasse"</span>)})</span>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="447" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 446;"><span id="cb3-447"><a></a>viewof search <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(cog<span class="op">,</span> {<span class="dt">format</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">.</span><span class="at">LIBELLE</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> cog<span class="op">.</span><span class="fu">find</span>(t <span class="kw">=&gt;</span> t<span class="op">.</span><span class="at">LIBELLE</span> <span class="op">==</span> <span class="st">"Grasse"</span>)})</span>
+<span id="cb3-448"><a></a></span>
+<span id="cb3-449"><a></a>cog <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(<span class="vs">`SELECT * FROM read_csv_auto("https://minio.lab.sspcloud.fr/lgaliana/data/python-ENSAE/cog_2023.csv") WHERE DEP == '06'`</span>)</span>
+<span id="cb3-450"><a></a>dvf <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(query)</span>
 <span id="cb3-451"><a></a></span>
-<span id="cb3-452"><a></a>cog <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(<span class="vs">`SELECT * FROM read_csv_auto("https://minio.lab.sspcloud.fr/lgaliana/data/python-ENSAE/cog_2023.csv") WHERE DEP == '06'`</span>)</span>
-<span id="cb3-453"><a></a>dvf <span class="op">=</span> db<span class="op">.</span><span class="fu">query</span>(query)</span>
-<span id="cb3-454"><a></a></span>
-<span id="cb3-455"><a></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span>
-<span id="cb3-456"><a></a></span>
-<span id="cb3-457"><a></a>query <span class="op">=</span> <span class="vs">`</span></span>
-<span id="cb3-458"><a></a><span class="vs">  FROM read_parquet('https://minio.lab.sspcloud.fr/projet-formation/nouvelles-sources/data/geoparquet/dvf.parquet')</span></span>
-<span id="cb3-459"><a></a><span class="vs">  SELECT</span></span>
-<span id="cb3-460"><a></a><span class="vs">    CAST(date_mutation AS date) AS date,</span></span>
-<span id="cb3-461"><a></a><span class="vs">    valeur_fonciere, code_commune,</span></span>
-<span id="cb3-462"><a></a><span class="vs">    longitude, latitude, valeur_fonciere AS valeur_fonciere_bar</span></span>
-<span id="cb3-463"><a></a><span class="vs">  WHERE code_commune = '</span><span class="sc">${</span>search<span class="op">.</span><span class="at">COM</span><span class="sc">}</span><span class="vs">'</span></span>
-<span id="cb3-464"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-452"><a></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span>
+<span id="cb3-453"><a></a></span>
+<span id="cb3-454"><a></a>query <span class="op">=</span> <span class="vs">`</span></span>
+<span id="cb3-455"><a></a><span class="vs">  FROM read_parquet('https://minio.lab.sspcloud.fr/projet-formation/nouvelles-sources/data/geoparquet/dvf.parquet')</span></span>
+<span id="cb3-456"><a></a><span class="vs">  SELECT</span></span>
+<span id="cb3-457"><a></a><span class="vs">    CAST(date_mutation AS date) AS date,</span></span>
+<span id="cb3-458"><a></a><span class="vs">    valeur_fonciere, code_commune,</span></span>
+<span id="cb3-459"><a></a><span class="vs">    longitude, latitude, valeur_fonciere AS valeur_fonciere_bar</span></span>
+<span id="cb3-460"><a></a><span class="vs">  WHERE code_commune = '</span><span class="sc">${</span>search<span class="op">.</span><span class="at">COM</span><span class="sc">}</span><span class="vs">'</span></span>
+<span id="cb3-461"><a></a><span class="vs">`</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
